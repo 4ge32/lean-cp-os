@@ -1,0 +1,505 @@
+{
+  "allowed": [
+    "propext"
+  ],
+  "theorems": [
+    {
+      "theorem": "LeanCpOs.initial_valid",
+      "axioms": [],
+      "status": "checked"
+    },
+    {
+      "theorem": "LeanCpOs.schedule_valid",
+      "axioms": [],
+      "status": "checked"
+    },
+    {
+      "theorem": "LeanCpOs.select_member",
+      "axioms": [],
+      "status": "checked"
+    },
+    {
+      "theorem": "LeanCpOs.select_highest",
+      "axioms": [],
+      "status": "checked"
+    },
+    {
+      "theorem": "LeanCpOs.select_none_iff",
+      "axioms": [],
+      "status": "checked"
+    },
+    {
+      "theorem": "LeanCpOs.activate_preserves",
+      "axioms": [
+        "propext"
+      ],
+      "status": "checked"
+    },
+    {
+      "theorem": "LeanCpOs.terminate_preserves",
+      "axioms": [],
+      "status": "checked"
+    },
+    {
+      "theorem": "LeanCpOs.running_current",
+      "axioms": [
+        "propext"
+      ],
+      "status": "checked"
+    },
+    {
+      "theorem": "LeanCpOs.at_most_one_running",
+      "axioms": [
+        "propext"
+      ],
+      "status": "checked"
+    },
+    {
+      "theorem": "LeanCpOs.active_state_consistent",
+      "axioms": [
+        "propext"
+      ],
+      "status": "checked"
+    },
+    {
+      "theorem": "LeanCpOs.activation_limit",
+      "axioms": [
+        "propext"
+      ],
+      "status": "checked"
+    },
+    {
+      "theorem": "LeanCpOs.invalid_activation",
+      "axioms": [],
+      "status": "checked"
+    },
+    {
+      "theorem": "LeanCpOs.activation_error_frame",
+      "axioms": [
+        "propext"
+      ],
+      "status": "checked"
+    },
+    {
+      "theorem": "LeanCpOs.activation_success",
+      "axioms": [
+        "propext"
+      ],
+      "status": "checked"
+    },
+    {
+      "theorem": "LeanCpOs.activation_other_active",
+      "axioms": [
+        "propext"
+      ],
+      "status": "checked"
+    },
+    {
+      "theorem": "LeanCpOs.preemption",
+      "axioms": [
+        "propext"
+      ],
+      "status": "checked"
+    },
+    {
+      "theorem": "LeanCpOs.termination_dispatch",
+      "axioms": [
+        "propext"
+      ],
+      "status": "checked"
+    },
+    {
+      "theorem": "LeanCpOs.termination_suspends",
+      "axioms": [
+        "propext"
+      ],
+      "status": "checked"
+    },
+    {
+      "theorem": "LeanCpOs.termination_other_active",
+      "axioms": [
+        "propext"
+      ],
+      "status": "checked"
+    },
+    {
+      "theorem": "LeanCpOs.termination_error_frame",
+      "axioms": [
+        "propext"
+      ],
+      "status": "checked"
+    },
+    {
+      "theorem": "LeanCpOs.unrelated_task_state",
+      "axioms": [
+        "propext"
+      ],
+      "status": "checked"
+    },
+    {
+      "theorem": "LeanCpOs.get_id_correct",
+      "axioms": [],
+      "status": "checked"
+    },
+    {
+      "theorem": "LeanCpOs.get_state_correct",
+      "axioms": [],
+      "status": "checked"
+    },
+    {
+      "theorem": "LeanCpOs.get_state_invalid",
+      "axioms": [],
+      "status": "checked"
+    },
+    {
+      "theorem": "LeanCpOs.initial_suspended",
+      "axioms": [],
+      "status": "checked"
+    },
+    {
+      "theorem": "LeanCpOs.transition_preserves",
+      "axioms": [
+        "propext"
+      ],
+      "status": "checked"
+    },
+    {
+      "theorem": "LeanCpOs.execution_preserves",
+      "axioms": [
+        "propext"
+      ],
+      "status": "checked"
+    },
+    {
+      "theorem": "LeanCpOs.reachable_valid",
+      "axioms": [
+        "propext"
+      ],
+      "status": "checked"
+    },
+    {
+      "theorem": "LeanCpOs.TaskControl.choose_none_iff",
+      "axioms": [
+        "propext"
+      ],
+      "status": "checked"
+    },
+    {
+      "theorem": "LeanCpOs.TaskControl.choose_perm",
+      "axioms": [
+        "propext"
+      ],
+      "status": "checked"
+    },
+    {
+      "theorem": "LeanCpOs.TaskControl.choose_highest",
+      "axioms": [
+        "propext"
+      ],
+      "status": "checked"
+    },
+    {
+      "theorem": "LeanCpOs.TaskControl.choose_fifo_head",
+      "axioms": [
+        "propext"
+      ],
+      "status": "checked"
+    },
+    {
+      "theorem": "LeanCpOs.TaskControl.initial_valid",
+      "axioms": [],
+      "status": "checked"
+    },
+    {
+      "theorem": "LeanCpOs.TaskControl.perm_countP",
+      "axioms": [
+        "propext"
+      ],
+      "status": "checked"
+    },
+    {
+      "theorem": "LeanCpOs.TaskControl.valid_of_perm",
+      "axioms": [
+        "propext"
+      ],
+      "status": "checked"
+    },
+    {
+      "theorem": "LeanCpOs.TaskControl.dispatch_perm",
+      "axioms": [
+        "propext"
+      ],
+      "status": "checked"
+    },
+    {
+      "theorem": "LeanCpOs.TaskControl.dispatch_valid",
+      "axioms": [
+        "propext"
+      ],
+      "status": "checked"
+    },
+    {
+      "theorem": "LeanCpOs.TaskControl.mayPreempt_perm",
+      "axioms": [
+        "propext"
+      ],
+      "status": "checked"
+    },
+    {
+      "theorem": "LeanCpOs.TaskControl.mayPreempt_valid",
+      "axioms": [
+        "propext"
+      ],
+      "status": "checked"
+    },
+    {
+      "theorem": "LeanCpOs.TaskControl.mayPreempt_activation_count",
+      "axioms": [
+        "propext"
+      ],
+      "status": "checked"
+    },
+    {
+      "theorem": "LeanCpOs.TaskControl.append_activation_count",
+      "axioms": [
+        "propext"
+      ],
+      "status": "checked"
+    },
+    {
+      "theorem": "LeanCpOs.TaskControl.append_activation_valid",
+      "axioms": [
+        "propext"
+      ],
+      "status": "checked"
+    },
+    {
+      "theorem": "LeanCpOs.TaskControl.drop_current_valid",
+      "axioms": [
+        "propext"
+      ],
+      "status": "checked"
+    },
+    {
+      "theorem": "LeanCpOs.TaskControl.activate_valid",
+      "axioms": [
+        "propext"
+      ],
+      "status": "checked"
+    },
+    {
+      "theorem": "LeanCpOs.TaskControl.terminate_valid",
+      "axioms": [
+        "propext"
+      ],
+      "status": "checked"
+    },
+    {
+      "theorem": "LeanCpOs.TaskControl.chain_self_valid",
+      "axioms": [
+        "propext"
+      ],
+      "status": "checked"
+    },
+    {
+      "theorem": "LeanCpOs.TaskControl.chain_valid",
+      "axioms": [
+        "propext"
+      ],
+      "status": "checked"
+    },
+    {
+      "theorem": "LeanCpOs.TaskControl.schedule_valid",
+      "axioms": [
+        "propext"
+      ],
+      "status": "checked"
+    },
+    {
+      "theorem": "LeanCpOs.TaskControl.getTaskID_valid",
+      "axioms": [],
+      "status": "checked"
+    },
+    {
+      "theorem": "LeanCpOs.TaskControl.getTaskState_valid",
+      "axioms": [],
+      "status": "checked"
+    },
+    {
+      "theorem": "LeanCpOs.TaskControl.stepPc_valid",
+      "axioms": [
+        "propext"
+      ],
+      "status": "checked"
+    },
+    {
+      "theorem": "LeanCpOs.TaskControl.enterISR_valid",
+      "axioms": [],
+      "status": "checked"
+    },
+    {
+      "theorem": "LeanCpOs.TaskControl.exitISR_valid",
+      "axioms": [
+        "propext"
+      ],
+      "status": "checked"
+    },
+    {
+      "theorem": "LeanCpOs.TaskControl.step_valid",
+      "axioms": [
+        "propext"
+      ],
+      "status": "checked"
+    },
+    {
+      "theorem": "LeanCpOs.TaskControl.execute_valid",
+      "axioms": [
+        "propext"
+      ],
+      "status": "checked"
+    },
+    {
+      "theorem": "LeanCpOs.TaskControl.reachable_valid",
+      "axioms": [
+        "propext"
+      ],
+      "status": "checked"
+    },
+    {
+      "theorem": "LeanCpOs.TaskControl.running_iff",
+      "axioms": [
+        "propext"
+      ],
+      "status": "checked"
+    },
+    {
+      "theorem": "LeanCpOs.TaskControl.at_most_one_running",
+      "axioms": [
+        "propext"
+      ],
+      "status": "checked"
+    },
+    {
+      "theorem": "LeanCpOs.TaskControl.activate_error_unchanged",
+      "axioms": [
+        "propext"
+      ],
+      "status": "checked"
+    },
+    {
+      "theorem": "LeanCpOs.TaskControl.terminate_error_unchanged",
+      "axioms": [
+        "propext"
+      ],
+      "status": "checked"
+    },
+    {
+      "theorem": "LeanCpOs.TaskControl.chain_error_unchanged",
+      "axioms": [
+        "propext"
+      ],
+      "status": "checked"
+    },
+    {
+      "theorem": "LeanCpOs.TaskControl.schedule_error_unchanged",
+      "axioms": [
+        "propext"
+      ],
+      "status": "checked"
+    },
+    {
+      "theorem": "LeanCpOs.TaskControl.getTaskID_unchanged",
+      "axioms": [],
+      "status": "checked"
+    },
+    {
+      "theorem": "LeanCpOs.TaskControl.getTaskState_unchanged",
+      "axioms": [],
+      "status": "checked"
+    },
+    {
+      "theorem": "LeanCpOs.TaskControl.terminate_success_discards",
+      "axioms": [
+        "propext"
+      ],
+      "status": "checked"
+    },
+    {
+      "theorem": "LeanCpOs.TaskControl.chain_success_discards",
+      "axioms": [
+        "propext"
+      ],
+      "status": "checked"
+    },
+    {
+      "theorem": "LeanCpOs.TaskControl.mayPreempt_deferred_in_ISR",
+      "axioms": [
+        "propext"
+      ],
+      "status": "checked"
+    },
+    {
+      "theorem": "LeanCpOs.TaskControl.mayPreempt_keeps_equal_or_lower",
+      "axioms": [
+        "propext"
+      ],
+      "status": "checked"
+    },
+    {
+      "theorem": "LeanCpOs.TaskControl.preemption_preserves_continuation",
+      "axioms": [
+        "propext"
+      ],
+      "status": "checked"
+    },
+    {
+      "theorem": "LeanCpOs.TaskControl.higher_priority_is_different_task",
+      "axioms": [
+        "propext"
+      ],
+      "status": "checked"
+    },
+    {
+      "theorem": "LeanCpOs.TaskControl.nonpreemptive_keeps_current",
+      "axioms": [
+        "propext"
+      ],
+      "status": "checked"
+    },
+    {
+      "theorem": "LeanCpOs.TaskControl.activate_success_in_ISR_queued",
+      "axioms": [
+        "propext"
+      ],
+      "status": "checked"
+    },
+    {
+      "theorem": "LeanCpOs.TaskControl.self_chain_restarts_at_limit",
+      "axioms": [
+        "propext"
+      ],
+      "status": "checked"
+    },
+    {
+      "theorem": "LeanCpOs.TaskControl.terminate_resource_guard",
+      "axioms": [
+        "propext"
+      ],
+      "status": "checked"
+    },
+    {
+      "theorem": "LeanCpOs.TaskControl.chain_resource_guard",
+      "axioms": [
+        "propext"
+      ],
+      "status": "checked"
+    },
+    {
+      "theorem": "LeanCpOs.TaskControl.schedule_resource_guard",
+      "axioms": [
+        "propext"
+      ],
+      "status": "checked"
+    }
+  ]
+}

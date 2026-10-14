@@ -1,0 +1,30 @@
+{
+  "canonical_vectors": 240,
+  "boundary_vectors": 23,
+  "sequences": 625,
+  "sequence_length": 4,
+  "total_vectors": 2763,
+  "tests": [
+    {
+      "id": "T-HOST",
+      "status": "passed",
+      "returncode": 0,
+      "cases": 2763,
+      "mismatches": [],
+      "actual_count": 2763
+    },
+    {
+      "id": "T-C-ABI",
+      "status": "passed",
+      "returncode": 0,
+      "cases": 2763,
+      "mismatches": [],
+      "actual_count": 2763
+    },
+    {
+      "id": "T-DIFFERENTIAL",
+      "status": "passed",
+      "cases": 2763
+    }
+  ]
+}

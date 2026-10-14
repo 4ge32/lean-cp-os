@@ -1,0 +1,618 @@
+{
+  "schema_version": 1,
+  "sha": "e7956349dd9c40537921a85c818d62b0ede7ed06",
+  "tree_sha": "9afb635e8e6c5975f47340e9781caeb328870729",
+  "run_id": "38534537533",
+  "attempt": "1",
+  "repository": "4ge32/lean-cp-os",
+  "started_at": "2026-10-14T08:21:55.287128+00:00",
+  "exact_commit": true,
+  "stages": [
+    {
+      "name": "lean-version",
+      "command": [
+        "lean",
+        "--version"
+      ],
+      "status": "passed",
+      "returncode": 0,
+      "log": "lean-version.log",
+      "seconds": 0.033
+    },
+    {
+      "name": "compiler-version",
+      "command": [
+        "gcc",
+        "--version"
+      ],
+      "status": "passed",
+      "returncode": 0,
+      "log": "compiler-version.log",
+      "seconds": 0.009
+    },
+    {
+      "name": "lean-build",
+      "command": [
+        "lake",
+        "build"
+      ],
+      "status": "passed",
+      "returncode": 0,
+      "log": "lean-build.log",
+      "seconds": 3.043
+    },
+    {
+      "name": "prepare-audit",
+      "command": [
+        "python3",
+        "scripts/lean_declarations.py",
+        "build/AuditAll.lean"
+      ],
+      "status": "passed",
+      "returncode": 0,
+      "log": "prepare-audit.log",
+      "seconds": 0.033
+    },
+    {
+      "name": "axioms",
+      "command": [
+        "lake",
+        "env",
+        "lean",
+        "build/AuditAll.lean"
+      ],
+      "status": "passed",
+      "returncode": 0,
+      "log": "axioms.log",
+      "seconds": 0.337
+    },
+    {
+      "name": "axiom-audit",
+      "command": [
+        "python3",
+        "scripts/audit.py",
+        "/home/runner/work/lean-cp-os/lean-cp-os/evidence/commits/e7956349dd9c40537921a85c818d62b0ede7ed06/runs/38534537533-1"
+      ],
+      "status": "passed",
+      "returncode": 0,
+      "log": "axiom-audit.log",
+      "seconds": 0.05
+    },
+    {
+      "name": "generate-model",
+      "command": [
+        "lake",
+        "env",
+        "lean",
+        "-c",
+        "build/Model.c",
+        "LeanCpOs/Model.lean"
+      ],
+      "status": "passed",
+      "returncode": 0,
+      "log": "generate-model.log",
+      "seconds": 0.478
+    },
+    {
+      "name": "generate-bridge",
+      "command": [
+        "lake",
+        "env",
+        "lean",
+        "-c",
+        "build/Bridge.c",
+        "LeanCpOs/Bridge.lean"
+      ],
+      "status": "passed",
+      "returncode": 0,
+      "log": "generate-bridge.log",
+      "seconds": 0.239
+    },
+    {
+      "name": "generate-task-scalar",
+      "command": [
+        "lake",
+        "env",
+        "lean",
+        "-c",
+        "build/TaskScalar.c",
+        "LeanCpOs/Task/Scalar.lean"
+      ],
+      "status": "passed",
+      "returncode": 0,
+      "log": "generate-task-scalar.log",
+      "seconds": 0.619
+    },
+    {
+      "name": "compile-model",
+      "command": [
+        "leanc",
+        "-O2",
+        "-fstack-usage",
+        "-c",
+        "build/Model.c",
+        "-o",
+        "build/Model.o"
+      ],
+      "status": "passed",
+      "returncode": 0,
+      "log": "compile-model.log",
+      "seconds": 0.648
+    },
+    {
+      "name": "compile-bridge",
+      "command": [
+        "leanc",
+        "-O2",
+        "-fstack-usage",
+        "-c",
+        "build/Bridge.c",
+        "-o",
+        "build/Bridge.o"
+      ],
+      "status": "passed",
+      "returncode": 0,
+      "log": "compile-bridge.log",
+      "seconds": 0.217
+    },
+    {
+      "name": "compile-task-scalar",
+      "command": [
+        "leanc",
+        "-O2",
+        "-fstack-usage",
+        "-c",
+        "build/TaskScalar.c",
+        "-o",
+        "build/TaskScalar.o"
+      ],
+      "status": "passed",
+      "returncode": 0,
+      "log": "compile-task-scalar.log",
+      "seconds": 0.371
+    },
+    {
+      "name": "compile-host",
+      "command": [
+        "gcc",
+        "-std=c11",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-fstack-usage",
+        "-I/home/runner/work/_temp/lean-cp-toolchain/lean-4.19.0-linux/include",
+        "-Ic",
+        "-c",
+        "c/host.c",
+        "-o",
+        "build/host.o"
+      ],
+      "status": "passed",
+      "returncode": 0,
+      "log": "compile-host.log",
+      "seconds": 0.176
+    },
+    {
+      "name": "link-host",
+      "command": [
+        "leanc",
+        "-O2",
+        "build/host.o",
+        "build/Model.o",
+        "build/Bridge.o",
+        "-o",
+        "build/c-host"
+      ],
+      "status": "passed",
+      "returncode": 0,
+      "log": "link-host.log",
+      "seconds": 0.141
+    },
+    {
+      "name": "compile-control",
+      "command": [
+        "gcc",
+        "-std=c11",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-fstack-usage",
+        "-I/home/runner/work/_temp/lean-cp-toolchain/lean-4.19.0-linux/include",
+        "-Ic",
+        "-c",
+        "c/control_flow.c",
+        "-o",
+        "build/control.o"
+      ],
+      "status": "passed",
+      "returncode": 0,
+      "log": "compile-control.log",
+      "seconds": 0.053
+    },
+    {
+      "name": "link-control",
+      "command": [
+        "leanc",
+        "-O2",
+        "build/control.o",
+        "build/Model.o",
+        "build/Bridge.o",
+        "-o",
+        "build/control-flow"
+      ],
+      "status": "passed",
+      "returncode": 0,
+      "log": "link-control.log",
+      "seconds": 0.141
+    },
+    {
+      "name": "host-and-c-tests",
+      "command": [
+        "python3",
+        "tests/test_differential.py",
+        "/home/runner/work/lean-cp-os/lean-cp-os/evidence/commits/e7956349dd9c40537921a85c818d62b0ede7ed06/runs/38534537533-1/test-results"
+      ],
+      "status": "passed",
+      "returncode": 0,
+      "log": "host-and-c-tests.log",
+      "seconds": 0.32
+    },
+    {
+      "name": "control-flow",
+      "command": [
+        "build/control-flow"
+      ],
+      "status": "passed",
+      "returncode": 0,
+      "log": "control-flow.log",
+      "seconds": 0.003
+    },
+    {
+      "name": "compile-task-scalar-host",
+      "command": [
+        "gcc",
+        "-std=c11",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-c",
+        "c/task_scalar_host.c",
+        "-o",
+        "build/task-scalar-host.o"
+      ],
+      "status": "passed",
+      "returncode": 0,
+      "log": "compile-task-scalar-host.log",
+      "seconds": 0.023
+    },
+    {
+      "name": "link-task-scalar-host",
+      "command": [
+        "leanc",
+        "-O2",
+        "build/task-scalar-host.o",
+        "build/TaskScalar.o",
+        "-o",
+        "build/task-scalar-host"
+      ],
+      "status": "passed",
+      "returncode": 0,
+      "log": "link-task-scalar-host.log",
+      "seconds": 0.14
+    },
+    {
+      "name": "task-control",
+      "command": [
+        "python3",
+        "tests/test_task_control.py",
+        "/home/runner/work/lean-cp-os/lean-cp-os/evidence/commits/e7956349dd9c40537921a85c818d62b0ede7ed06/runs/38534537533-1/test-results",
+        "--scalar-runner",
+        "build/task-scalar-host"
+      ],
+      "status": "passed",
+      "returncode": 0,
+      "log": "task-control.log",
+      "seconds": 2.618
+    },
+    {
+      "name": "qemu-task-control",
+      "command": [
+        "python3",
+        "scripts/verify_qemu.py",
+        "/home/runner/work/lean-cp-os/lean-cp-os/evidence/commits/e7956349dd9c40537921a85c818d62b0ede7ed06/runs/38534537533-1/qemu"
+      ],
+      "status": "passed",
+      "returncode": 0,
+      "log": "qemu-task-control.log",
+      "seconds": 2.374
+    },
+    {
+      "name": "runtime-audit",
+      "command": [
+        "python3",
+        "scripts/runtime_audit.py",
+        "/home/runner/work/lean-cp-os/lean-cp-os/evidence/commits/e7956349dd9c40537921a85c818d62b0ede7ed06/runs/38534537533-1"
+      ],
+      "status": "passed",
+      "returncode": 0,
+      "log": "runtime-audit.log",
+      "seconds": 0.04
+    },
+    {
+      "name": "symbols",
+      "command": [
+        "nm",
+        "--defined-only",
+        "build/c-host"
+      ],
+      "status": "passed",
+      "returncode": 0,
+      "log": "symbols.log",
+      "seconds": 0.06
+    },
+    {
+      "name": "evidence-selftests",
+      "command": [
+        "python3",
+        "tests/test_evidence.py"
+      ],
+      "status": "passed",
+      "returncode": 0,
+      "log": "evidence-selftests.log",
+      "seconds": 0.347
+    },
+    {
+      "name": "trace",
+      "command": [
+        "python3",
+        "scripts/trace_check.py",
+        "/home/runner/work/lean-cp-os/lean-cp-os/evidence/commits/e7956349dd9c40537921a85c818d62b0ede7ed06/runs/38534537533-1"
+      ],
+      "status": "passed",
+      "returncode": 0,
+      "log": "trace.log",
+      "seconds": 0.05
+    },
+    {
+      "name": "source-stability",
+      "status": "passed"
+    }
+  ],
+  "limitations": [
+    "Single-core basic-task subset; no full OSEK/BCC/SC1/AUTOSAR conformance",
+    "Generic Lean model and bounded generated-C target adapter are compared by tests; no compiler/adapter/assembly refinement proof",
+    "No liveness, WCET, full IRQ or resource-subsystem proof",
+    "Source snapshot checked at beginning/end; not an adversarial concurrent-write monitor"
+  ],
+  "source_hashes": {
+    ".github/workflows/verify.yml": "67f72ae3e0bc13275a24438919a355fa8b2230e8653d026a0d9be7a7590b8e35",
+    ".gitignore": "05dc4453d6346145b657778c5035e42042aaca270b3137c470af4c10ecb872b9",
+    "Audit.lean": "98d9b793d36941407c1efb0459af7b57f4aadff897536d83a5485d024b38cceb",
+    "LICENSE-STATUS.md": "b89c0151b87c09f7c58d98be9b27f9cb8f6a6dcb537360f60d6c7b810a815cab",
+    "LeanCpOs.lean": "48e93de148b3edaceb71542a1acbc9dd3f75728bed86cd4ccf76a4e42b1ccd3e",
+    "LeanCpOs/Bridge.lean": "381044e1147f1212879ac62e5cd266d359fb669660d095d1f6e66bc610dc8dee",
+    "LeanCpOs/Model.lean": "1a596a1990a5a400fbc0ab8df5fa546138841e339034abddde05355940776580",
+    "LeanCpOs/Proofs.lean": "70a960c54cf7d276593ed01fa96ac46c77c785be7368acd429d706d4693b4290",
+    "LeanCpOs/Task/Model.lean": "4cd4cbd5bf6e0331dd350039e24e45f5c7d6fd762fbb8809df07c212e3f584f5",
+    "LeanCpOs/Task/Proofs.lean": "cdd3f6f34f891196debf3b67981761cbda087a04613753433565cd679ba0f483",
+    "LeanCpOs/Task/Protocol.lean": "7112ea304ab1dde5387649e746e90ecfa95990cc26685e8d4deb14429d453384",
+    "LeanCpOs/Task/Scalar.lean": "360057b3576214d44e5be1ff61788da57d55088732b7a6f6fadeb311eb9011db",
+    "LeanCpOs/Task/Semantics.lean": "2e9074902a0388337f8f9acfbad26657ca10273b7eaeed39ba2cf4e22d6f0299",
+    "Main.lean": "a982553e8291f2273c9aebfe455ad850e44fc21a782711945a3b3fec856cc6cb",
+    "README.md": "2aa6e94d46fd3aeb0595d07810dd85d950f9cf22187be67347eb457e1e5eb942",
+    "TaskMain.lean": "24d899fe713ad6f57370a24d353117f2f0781460003af76e9cc92e3df3abccc9",
+    "c/bridge.h": "850b2340fee819339eb413c20dcdb9ecb6c7f17940b2b3a1f22346d1cc9075c2",
+    "c/control_flow.c": "6dfb4fa7f8dc02de57f8e877b146e4576ff4db5fb6cff4ab954722d938bc9501",
+    "c/host.c": "01401879d7cd5617b6c4a7c42946e32b6c796836f610bb23abed65dde0270811",
+    "c/task_scalar_host.c": "6c70a91b0b26dad5a5f363d5504648a3d07a08bb82ff2e12516318b483067ca1",
+    "docs/CI.md": "f4ba374fa95778b2cdd78ef481dcee44c568fd928f736779ae7e2ed82c8d164a",
+    "docs/DESIGN.md": "3ebc8f7e67693b0deb12f3c93b9ca770db8732032d602e281453ef0b8958b7e7",
+    "docs/GETTING_STARTED.ja.md": "ea74a2cfbb007b7eaeb0d66794f98d65f936e8dba64e7c30ec649e74747d9dd8",
+    "docs/QEMU.md": "0bea2b4fa32c392e53150690e54b7c1d9a384a8b96f317e595db1a9c1eb654ea",
+    "docs/RUNTIME.md": "6e9520389b038e34123bf8e08fb12338f8823ad578820e55472300d3370acf8f",
+    "docs/SOURCES.md": "ae24aa63aff19ee0b0d7c5f4af3c2c88e64ab823207e85a05527da4764ffe539",
+    "docs/TASK_CONTROL.md": "b2c0f1f47f81ee5b5f0ff8131986f81dee39afe98d8fade444a49bc8b685d5df",
+    "lake-manifest.json": "2229b14fa7864ca346e1e7118ff07bf83cd34807d40b2749fe72fa985cba44de",
+    "lakefile.toml": "661512279f3dfb49f0e63f055b28662f0bf11c6fad158c053749d25b068fa0c9",
+    "lean-toolchain": "55e97be96000b5e9e290c9e74482e5e317861499a5540353ce845471bded8cea",
+    "scripts/audit.py": "41853807023dd7979f4784d999517bdf976e945eedddc2bc0fe72ef62707366c",
+    "scripts/bootstrap_lean.sh": "23306f23cea93db593150f6603290f747b4ba965424776d9806f92777e74f547",
+    "scripts/bootstrap_qemu.sh": "96d3d94c08b5932abbe72f96d207c8dbad4e575e301a845c81fd909ebc912331",
+    "scripts/enumerate_commits.py": "d5b701324bfdd41123a0da82848f7660634a551208f4a4c49542ab19b038a70d",
+    "scripts/impact.py": "f91f0de703cc02b0ba66cc8d83767a0e9d9890d183bc07b772633bc9cade1df7",
+    "scripts/lean_declarations.py": "ff97c00ed418fe353e8f301edae48b1a77d7b542aee84d1369506f5c4a0a4651",
+    "scripts/publish_history.py": "10a332bac5e50a0b8279d9105227ee225ac0bbf5a0ed6b59d4f786cee2c577e6",
+    "scripts/render_report.py": "079d17868657bda3c9d0cb0fca231338142f7412f8259a2de9dfb5a74ffa273c",
+    "scripts/runtime_audit.py": "0fedc3276a5f0b0ad22ea0683525c4aa1bc5298f74bee956a5b6d5a8953322c1",
+    "scripts/trace_check.py": "650be7f93f8d01f4e5786143f14bf0132195edd9e7a868b98005336650a55693",
+    "scripts/verify.py": "2db6e87c5dc88af0e80fc9f8f486187a604a4150978f4aecba0a4f3b12e36ad9",
+    "scripts/verify_commits.py": "666ce0f74d941155e826b0f3d715104725e8c5ca06fe79c20eddc29b55c0cb3e",
+    "scripts/verify_qemu.py": "5429ae70b26fc40971132132d86deb1c81a3eb8f632d0dcec67dcdd52dd60e87",
+    "target/aarch64/boot.S": "ec3c055da95065bde433421e59ddf30099d4c044d91acf72de1da688d72df879",
+    "target/aarch64/context.S": "e635a5ba0235957286055c713795110c0de9e8e3f5ae9fdda876e03d7c5465f6",
+    "target/aarch64/link.ld": "c18dbef0cad66149d5a4ee4a5b1205e0c3bfffc92f6462814a957ce8f4b0527c",
+    "target/aarch64/runtime.c": "7f22cfea700e4561f380bb1c65f608e213eb22dad47056ed824eeaf021c05490",
+    "target/aarch64/runtime.h": "05504a43317a42f2963a5a1d0365b594695e754bdd4c0630af5af798adcf8f19",
+    "target/aarch64/tests.c": "e41e1b2372276215d8de27f1f979a2f700e763ca8e801e3c975857ed2a4aec66",
+    "tests/test_differential.py": "3a6618fe97db9c994e1846089d7ca4784d7aff0f5ae053105551371ec7957daf",
+    "tests/test_evidence.py": "30bdddf961a6f9f5f901376b2b9ffb383bea0185d1ec2053dfb08a025b95f557",
+    "tests/test_task_control.py": "20e7dea54f5b95b81641313cfbe029a84d4b207b6b9bf25141cb0ab2d5b89d4a",
+    "tools/proc_self_compat.c": "5fb57101e8f3ed674a9add4a87a163d99d5f7e3e55ae9472561f72e385170b20",
+    "trace/requirements.json": "17f0db1d967cbb4eb34e4f6c8b516979550d1f0df074a12ad08a0252c1480814",
+    "trace/sources.json": "cefa606d9e93e1d1c31863983cefd3609dfd6d6a71e8b04e05a61b0ed06822b7",
+    "trace/tests.json": "7745083f00f5b2553548a4da50957e3871ce08d19316edce70fcf98c1ea5cb47"
+  },
+  "toolchain": {
+    "lean": {
+      "sha256": "92c3d35b5bfaa5e0fea413a775d504cf46cd95e1345df61c2274f76779e7e023"
+    },
+    "lake": {
+      "sha256": "5111aee5c9434ab05d4265606475ef22e8bda69aaf3a0657b61a7eec6e550bed"
+    },
+    "leanc": {
+      "sha256": "39a4d993906671c6b2eec9e75053aff3917fd1d4530706f32a273aa8f283ab41"
+    },
+    "gcc": {
+      "sha256": "1b99826121ae6682a634e5efe09bd3e3df58ce58e0b28f849114ab5b89139c26"
+    },
+    "bin/clang": {
+      "sha256": "48c8e81f91e48749438c6ef92543f5a46b8bc71c88a6aaacc047ac4edeee65e2"
+    },
+    "bin/ld.lld": {
+      "sha256": "e334e6e1bccf45c3efe0d078712a602f01ccad56a04c601f959e39bc69f802de"
+    },
+    "include/lean/lean.h": {
+      "sha256": "d1a21fca5f81d34ce6b763f7af58fcb1a5081e26fda64f475684b642db4ead8c"
+    },
+    "lib/lean/libleanshared.so": {
+      "sha256": "2ab605c74c78f9ba4431a7b5305a4b28a9071d8a826f223eb14fe5530f78e14d"
+    },
+    "lib/lean/libleanrt.a": {
+      "sha256": "1459d81b9bee0ac0cc0693238165fa605d22ed63e43755d49c97122fe3ade8ce"
+    },
+    "lib/lean/libInit.a": {
+      "sha256": "d50f0f30e78509dfd672ad08da0491a695e0ec3fa9fed4b13bdbd223728f3f02"
+    }
+  },
+  "platform": {
+    "system": "Linux",
+    "machine": "x86_64"
+  },
+  "source_unchanged": true,
+  "overall": "passed",
+  "coverage": "incomplete",
+  "finished_at": "2026-10-14T08:22:08.046348+00:00",
+  "artifact_files": {
+    "axiom-audit.log": "de83e8b2a008478d7fe2c656fa7c11a0a0eab38c8f7d22a2cb76996b949bfab1",
+    "axioms.json": "55637f5b151842b07f0d91fe552f7f3d97d07e418095c6aec484efea28415648",
+    "axioms.log": "633061a066a321a5d888538f9404a0933f04efa6f25f74b347b3411d8a895c60",
+    "compile-bridge.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "compile-control.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "compile-host.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "compile-model.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "compile-task-scalar-host.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "compile-task-scalar.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "compiler-version.log": "8497f84b2b8334c413d9c6166bd39d009ba55d2ff60a8f23e66dfa5819c2b048",
+    "control-flow.log": "2494f943d18753691e609dbc240d8fab13bf705f7358fdf5514486b32e3dadfd",
+    "evidence-selftests.log": "4a231bf6784d46cdc7adb046ead7b164cd4355672df34e9ce232669bcc0407fc",
+    "execution.json": "b1c3f3188b6ed0aa0a891e9c443543f99973285c027cb7ea5de95f2b675c78d9",
+    "generate-bridge.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "generate-model.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "generate-task-scalar.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "generated/AuditAll.lean": "98d9b793d36941407c1efb0459af7b57f4aadff897536d83a5485d024b38cceb",
+    "generated/Bridge.c": "a2a98e3a2414c42b0eb6dca176e271426f6ce88ae6a59dee01217d7614868821",
+    "generated/Bridge.o": "915c6b0fa378f01c721dbf50a91c332b540c1f750945ecb3b77738439217ee28",
+    "generated/Bridge.su": "86a034b39da7091d8fe4f2d75a9b655f33def1c7778269a2c6645a25351a2c7f",
+    "generated/Model.c": "075aeb3655853e78d67ebd9576874809243761d5f1d89abecf14462162bf6fc6",
+    "generated/Model.o": "e7f5a1af9838e534064b666e935bb9919c93863d51673039f7291f96af7fe986",
+    "generated/Model.su": "f4c2462a1e988d439267867048f00a5c9c8617cf31dd008b4bb6d04f545dcd97",
+    "generated/TaskScalar.c": "2360396289aebc4330ee1c40bd465e60ea2ce592c7758e469fdf07a4c9cc8c9a",
+    "generated/TaskScalar.o": "ddde2eb7e2e721af55006ed9f4b1b5a70aae8d8f5dad1d29f8932852c13d7fff",
+    "generated/TaskScalar.su": "fd9adf7456dc538198b80606eda4193e71b62f6eb4ea9e2b95930bdd5d32702b",
+    "generated/c-host": "34cd01b7c906b8128a90ad3b7430ac054173e4de028383ae6cfae48cef788785",
+    "generated/control-flow": "2425fa250e4b1f44ec4070bffc8ff6db4627dd4caa2d0692ac6288c4d82e36af",
+    "generated/control.o": "1b23183b3e4dc3300ce89d78260aa31f680a6dbf40297013f5ed5eb1f07fb8d9",
+    "generated/control.su": "a26ccc1040c469ccab44f3443bff62bb6236aa4c6e983b70867a19403a3014ae",
+    "generated/host.o": "9f7f84dcdc2e4887f12a4eb4fe5b75a876607df746ed60f9aaf36eb58972cb73",
+    "generated/host.su": "53c5d240b324b47f781eac2c21d75aeb5beb6a24ef7f0fe995b40d924e6b0563",
+    "generated/task-scalar-host": "22fc6df6f5243e3616e5036be2bb5a560a6b1bc29b3c027a5bce038cf1138ad1",
+    "generated/task-scalar-host.o": "f66278aba2e8f5fba303aa8e7afafdffdb89b022f255bb7cd1520f78e2ead326",
+    "host-and-c-tests.log": "93c5051d16258e4c4b191e941fba8d4333d181434f6af26ae5fce716bfd33d50",
+    "lean-build.log": "c12b486bf73772c866bea3279e25475bc37fdf983a7fce4435f8f563198a0cb9",
+    "lean-version.log": "5362a246ce2545424db10a77de8fd4694f4cf8b0170dfd43fa727acf7f7f259b",
+    "link-control.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "link-host.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "link-task-scalar-host.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "olean/LeanCpOs/Bridge.ilean": "4622cab57b2a73d969a0024fa2d97119db9339f7798826b830b84b881fb3a760",
+    "olean/LeanCpOs/Bridge.ilean.hash": "ab7d7ca424d5f9f32a627c1e982781031496085b647eab84a30259805324bee0",
+    "olean/LeanCpOs/Bridge.olean": "d857b8cca55ff52245473637b7e4fb31fd1c84edd76c93ae0f63419094fa10a3",
+    "olean/LeanCpOs/Bridge.olean.hash": "be500cc2d5e3e4d6d51fe1197abba7711c9a860eeee9fe91a5d55701c0bedd46",
+    "olean/LeanCpOs/Bridge.trace": "5c56c0e22ac04f4ee6e63067300ccfb15da5dc7dd9bd893155aad56e460df6f5",
+    "olean/LeanCpOs/Model.ilean": "a79d00d5a2091314519bb5fd030b1c1e09ee9fdbb2b4a852b7e112c266864c4d",
+    "olean/LeanCpOs/Model.ilean.hash": "1d068db5c08cb0769f117106ef6630379dac0d2b1235f60ffe3164d180cfda99",
+    "olean/LeanCpOs/Model.olean": "114918faa9f3426d3e43017b2911770056baeb4669659fcd79d6507f8ebdc492",
+    "olean/LeanCpOs/Model.olean.hash": "ed16f566721f0b39d070fa8e519eb47399cdfef4b54b9dadd62194a014e9b03d",
+    "olean/LeanCpOs/Model.trace": "a8a0e1fd31b5b8869d4662fab5380b7df3afd899b81e04b5e06cbf627d4167d7",
+    "olean/LeanCpOs/Proofs.ilean": "ab7fbdd7b70461301fc258cf20063f3bce1f73e04fb5a8778326f4a81ec607d2",
+    "olean/LeanCpOs/Proofs.ilean.hash": "1885f3231cddfd9c9baff125c61b38ba38407027fb8829ccb621da5ffa4a6230",
+    "olean/LeanCpOs/Proofs.olean": "8eec2b82eb6189fa6da338c75a8bb919fd366fb5221d13ea780c2b1aa7385c42",
+    "olean/LeanCpOs/Proofs.olean.hash": "2ee3f93e1d367dd55985b8b89cf35dff0373f7871e3798161b2070600d2a3b55",
+    "olean/LeanCpOs/Proofs.trace": "92be1ed44f2aa0c90e24b132bfb2fa3c78fbf9341845a75bd803e9c018149d75",
+    "olean/LeanCpOs/Task/Model.ilean": "2c1b9aa004b626c33d95b0a13d976c94fbc232a99b3ee6fb34b01298076ebc6c",
+    "olean/LeanCpOs/Task/Model.ilean.hash": "e277061c9da32a43b5f4be58f8edad37d4a5615bdce20555933350bbf4278290",
+    "olean/LeanCpOs/Task/Model.olean": "8a49a05b4451f6635f04f874493806298590fc97f7f1772e19fbf1ac3bc0e457",
+    "olean/LeanCpOs/Task/Model.olean.hash": "1289fefd2a1bd79f6cbb918fc7bd9e9a96b0fbde89113b43a16e14723a650519",
+    "olean/LeanCpOs/Task/Model.trace": "371db314cd9520f1b7bdaf87920b8e698ac0b4716f6891c5724becb653d094fb",
+    "olean/LeanCpOs/Task/Proofs.ilean": "71ca1c8c25dabd702c2927f32d5aabba46ad7c26d26dd6954dd9cbdc65ef1f45",
+    "olean/LeanCpOs/Task/Proofs.ilean.hash": "ee6278965bd01a51b3b5a62aab71fd441868efcf7289db0fcb5afee73f88b52d",
+    "olean/LeanCpOs/Task/Proofs.olean": "99eb836207d1d179bb20b14e95dcbbe224133e164f10b50d22b88d6e1f344cfe",
+    "olean/LeanCpOs/Task/Proofs.olean.hash": "f4033ddae2ff38960692d69022384f34b7efc00d56bc98cb347ccb7075b5c04f",
+    "olean/LeanCpOs/Task/Proofs.trace": "4a00643aa157ba16a9eeed43a88046255ac0255ac3111bfadd57334f76cbc13a",
+    "olean/LeanCpOs/Task/Protocol.ilean": "356d368dcb03c664beed4ae0ff32ffe4ac7ab5c442dd8ce47adae9dbaf228518",
+    "olean/LeanCpOs/Task/Protocol.ilean.hash": "c0ed5baf9276da0b4d48e2ef5f0a4fbcf9b3d8bc9f6b19bccfb3d00468f7a3e3",
+    "olean/LeanCpOs/Task/Protocol.olean": "1909bf22a35494dfc842d6aaa316242c84e65d85f991b58fed1cd5d301dde275",
+    "olean/LeanCpOs/Task/Protocol.olean.hash": "fd062d766943493f0bd2990cc12dc990b699e1ad677da2d578e330a8707a5b37",
+    "olean/LeanCpOs/Task/Protocol.trace": "be645ed6daf38c63b1aaa89472a06477d06f6a046d5435dd42bd353895edf44b",
+    "olean/LeanCpOs/Task/Scalar.ilean": "419d94507511be7c0b03777d5ccbb8b495eaecd5d6ea1ab800e89817344d0a07",
+    "olean/LeanCpOs/Task/Scalar.ilean.hash": "9de768d0634db00abde168d8a1141fe4c564a6b2f378b61de7a3a4e14512db15",
+    "olean/LeanCpOs/Task/Scalar.olean": "354c44cc17a20fad192f325a9eaef61599b5782ea80693ae493ba42720aa29a9",
+    "olean/LeanCpOs/Task/Scalar.olean.hash": "50ede29b9bff7f8b5ae2f5ac10e68da67f67087f4b272b586dd0ad8f33573407",
+    "olean/LeanCpOs/Task/Scalar.trace": "498c68eb2922e086703869bf0ba201b497fb946670968d782db5a65efb596a92",
+    "olean/LeanCpOs/Task/Semantics.ilean": "91d6ab0726b1f2194097c7e3c3c984bc95a7eb37c8fc69782ccfee4c1a5006c6",
+    "olean/LeanCpOs/Task/Semantics.ilean.hash": "fb03b46c6da51059da7a1cd6f65989e0edfe5cf84638cd942a00af91fe35cc6f",
+    "olean/LeanCpOs/Task/Semantics.olean": "138f16e8352cb568146009c2e6bea95ea30a7d4e0165fe21ae8a1122989169fe",
+    "olean/LeanCpOs/Task/Semantics.olean.hash": "5e589273e7de0e1d3ee7a67258071d37828f80089c854ca60c224c69d77455e1",
+    "olean/LeanCpOs/Task/Semantics.trace": "280de08d289e4440226d09465db56f1350edbc8df4c2387f809364bfd735e31c",
+    "olean/LeanCpOs.ilean": "dcf6605ba36b8ea750f1e3aa3ade7005d1ae5f192d0c2947fe85a2afcee39388",
+    "olean/LeanCpOs.ilean.hash": "f6ca82b10a96e379ca6093a37cd6f491b271765d476007ed21548de975f3a982",
+    "olean/LeanCpOs.olean": "88c1ebe9b8d32fba53c69399e03279454a52277ff04e111bbb561c47135c0c80",
+    "olean/LeanCpOs.olean.hash": "a4a2932a5afc6d88782a5e4c28ffe5ac14977a5ee33e3c8ffe20fc7b1c215a16",
+    "olean/LeanCpOs.trace": "0f54294ecec792f8ad9f303094d57307f645622ffa3b95559bd99e057d6a99be",
+    "prepare-audit.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "qemu/TaskScalar.c": "2360396289aebc4330ee1c40bd465e60ea2ce592c7758e469fdf07a4c9cc8c9a",
+    "qemu/TaskScalar.o": "c13c4ffc898f2e3d0397fc1d016935c8110bf1d7ebf0664e41e621f3efdaf80f",
+    "qemu/boot.o": "65be3f05f34659acad5552074011d762a5caa425bb1f4b1cc8dd16fcfbf9bda1",
+    "qemu/build.log": "41d08395d6396e4f684a8ffb3aff1f1932859787f3b0a2e650f2dbaac2e405aa",
+    "qemu/context.o": "e23de745dd42dd197d6f9fd8401472bbd158c2cec9559bc8946d4d801f644ed8",
+    "qemu/osek-task.elf": "8301becc81afd62bb8f72c5b927c85a46226a4e3fba4f721c99cc36aed0dbad4",
+    "qemu/osek-task.map": "7430de4da126d7c03b4627d220ea0f15c8fe2c2cf1db4de9cc170817da3df039",
+    "qemu/qemu.json": "8293404650edb42c5dcc4e017dcbe02cb8f07e90ee639fd5d4b100067811217a",
+    "qemu/runtime.o": "08f6802c30d84ec98d54b954b54b734820eda2911156d2e0732cf59f13c8834e",
+    "qemu/symbols.txt": "50b96651679dfd5951d0c57465b885aace506e54fd67a38794eaaae0056623e0",
+    "qemu/tests.o": "c22bb3f0faf541c9b099cd1752f81c2c18830038bbe81e4d7150415226ff5df2",
+    "qemu/uart.log": "2ff6785007bab9abf2b1d7e4c8dd24d53b598947adb58c0b3785a0aa00cb61ea",
+    "qemu-task-control.log": "2ff6785007bab9abf2b1d7e4c8dd24d53b598947adb58c0b3785a0aa00cb61ea",
+    "runtime-audit.log": "4f4566062f19d9c092a3f66fbf07fef328ac76e00b4f5f2ea8a25cecee634fe2",
+    "runtime-notices/LICENSE": "8b28515ffffc5c0fe2807d8ae3735b00b324d9b7ce807dd63ff6ac8922fbce7e",
+    "runtime-notices/LICENSES": "7a26b58fa2b7867bf6b19ef7555b8ccfa4fd8ec737f0d64da3bd1d06e14f5e18",
+    "runtime.json": "d77a2e668b369b365223b4b8e6867c6652c38e5766807de41a99f51b4e1791e4",
+    "symbols.log": "e0267647c95af3bfaa7649d474d72aaeb6ca46e5d9144761e2ba1ff6005696f2",
+    "task-control.log": "427e16fb23110e6e058439a1db2ca36e40a9592051cb353518b975a15e15605b",
+    "test-results/T-C-ABI.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "test-results/T-C-ABI.stdout": "4dc60cc04adba9bc2880c15160161f19c503b723950dd0064e5323841a4dfcb2",
+    "test-results/T-HOST.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "test-results/T-HOST.stdout": "4dc60cc04adba9bc2880c15160161f19c503b723950dd0064e5323841a4dfcb2",
+    "test-results/oracle.txt": "4dc60cc04adba9bc2880c15160161f19c503b723950dd0064e5323841a4dfcb2",
+    "test-results/task-control-input.txt": "b923a56e0db1da5be01398816e97d4de6b1822be536eff81fdeec71518484783",
+    "test-results/task-control-oracle.txt": "6236e7ee3889fbc18b632e41f0079512d77fbfe069a3c7972517fe0f74275c4a",
+    "test-results/task-control.json": "427e16fb23110e6e058439a1db2ca36e40a9592051cb353518b975a15e15605b",
+    "test-results/task-control.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "test-results/task-control.stdout": "6236e7ee3889fbc18b632e41f0079512d77fbfe069a3c7972517fe0f74275c4a",
+    "test-results/task-protocol.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "test-results/task-protocol.stdout": "0eb26b20df56674648a736b432ff95f2bc09289e125c6d92dae741bbd3e4f184",
+    "test-results/task-scalar-input.txt": "8ffc1a0046cf9222098841508dda69cbddbbc26e2f5166faeef831d9c5fe3e61",
+    "test-results/task-scalar-oracle.txt": "ee0a9f02ef766d5410c1c884b8c91b24ba653fd13846a79887e4177e5133818a",
+    "test-results/task-scalar.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "test-results/task-scalar.stdout": "ee0a9f02ef766d5410c1c884b8c91b24ba653fd13846a79887e4177e5133818a",
+    "test-results/tests.json": "93c5051d16258e4c4b191e941fba8d4333d181434f6af26ae5fce716bfd33d50",
+    "test-results/vectors.txt": "527d9b1eb202f173524ba010aadbbbb490d6971a02a44ff8c9a8899e8a4f59db",
+    "trace-inputs/requirements.json": "17f0db1d967cbb4eb34e4f6c8b516979550d1f0df074a12ad08a0252c1480814",
+    "trace-inputs/sources.json": "cefa606d9e93e1d1c31863983cefd3609dfd6d6a71e8b04e05a61b0ed06822b7",
+    "trace-inputs/tests.json": "7745083f00f5b2553548a4da50957e3871ce08d19316edce70fcf98c1ea5cb47",
+    "trace.json": "cc15f3f6bca888c68e462ccf46fa3aec3565eba557f326a82c3fd27bcebbae58",
+    "trace.log": "edae1da46dbac205adbd612e5e1135e10bc241385b1241eafeadc138ee390de8"
+  }
+}

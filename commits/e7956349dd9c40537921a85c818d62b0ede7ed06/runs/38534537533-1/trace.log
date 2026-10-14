@@ -1,0 +1,22 @@
+{
+  "structural_status": "passed",
+  "coverage_status": "incomplete",
+  "errors": [],
+  "gaps": [
+    "LCPO-011: no checked proof for this boundary",
+    "LCPO-012: deferred/unimplemented/unproved/not_run",
+    "LCPO-012: source PDF hash unavailable: AUTOSAR-CP-R24-11-OS",
+    "LCPO-012: tests not_run",
+    "LCPO-014: deferred/unimplemented/unproved/not_run",
+    "LCPO-014: tests not_run",
+    "LCPO-015: deferred/unimplemented/unproved/not_run",
+    "LCPO-015: tests not_run",
+    "LCPO-016: deferred/unimplemented/unproved/not_run",
+    "LCPO-016: tests not_run",
+    "LCPO-017: deferred/unimplemented/unproved/not_run",
+    "LCPO-017: tests not_run",
+    "LCPO-018: no checked proof for this boundary",
+    "LCPO-019: no checked proof for this boundary",
+    "LCPO-021: no checked proof for this boundary"
+  ]
+}

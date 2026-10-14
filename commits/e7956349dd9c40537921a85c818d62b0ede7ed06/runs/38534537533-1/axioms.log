@@ -1,0 +1,76 @@
+'LeanCpOs.initial_valid' does not depend on any axioms
+'LeanCpOs.schedule_valid' does not depend on any axioms
+'LeanCpOs.select_member' does not depend on any axioms
+'LeanCpOs.select_highest' does not depend on any axioms
+'LeanCpOs.select_none_iff' does not depend on any axioms
+'LeanCpOs.activate_preserves' depends on axioms: [propext]
+'LeanCpOs.terminate_preserves' does not depend on any axioms
+'LeanCpOs.running_current' depends on axioms: [propext]
+'LeanCpOs.at_most_one_running' depends on axioms: [propext]
+'LeanCpOs.active_state_consistent' depends on axioms: [propext]
+'LeanCpOs.activation_limit' depends on axioms: [propext]
+'LeanCpOs.invalid_activation' does not depend on any axioms
+'LeanCpOs.activation_error_frame' depends on axioms: [propext]
+'LeanCpOs.activation_success' depends on axioms: [propext]
+'LeanCpOs.activation_other_active' depends on axioms: [propext]
+'LeanCpOs.preemption' depends on axioms: [propext]
+'LeanCpOs.termination_dispatch' depends on axioms: [propext]
+'LeanCpOs.termination_suspends' depends on axioms: [propext]
+'LeanCpOs.termination_other_active' depends on axioms: [propext]
+'LeanCpOs.termination_error_frame' depends on axioms: [propext]
+'LeanCpOs.unrelated_task_state' depends on axioms: [propext]
+'LeanCpOs.get_id_correct' does not depend on any axioms
+'LeanCpOs.get_state_correct' does not depend on any axioms
+'LeanCpOs.get_state_invalid' does not depend on any axioms
+'LeanCpOs.initial_suspended' does not depend on any axioms
+'LeanCpOs.transition_preserves' depends on axioms: [propext]
+'LeanCpOs.execution_preserves' depends on axioms: [propext]
+'LeanCpOs.reachable_valid' depends on axioms: [propext]
+'LeanCpOs.TaskControl.choose_none_iff' depends on axioms: [propext]
+'LeanCpOs.TaskControl.choose_perm' depends on axioms: [propext]
+'LeanCpOs.TaskControl.choose_highest' depends on axioms: [propext]
+'LeanCpOs.TaskControl.choose_fifo_head' depends on axioms: [propext]
+'LeanCpOs.TaskControl.initial_valid' does not depend on any axioms
+'LeanCpOs.TaskControl.perm_countP' depends on axioms: [propext]
+'LeanCpOs.TaskControl.valid_of_perm' depends on axioms: [propext]
+'LeanCpOs.TaskControl.dispatch_perm' depends on axioms: [propext]
+'LeanCpOs.TaskControl.dispatch_valid' depends on axioms: [propext]
+'LeanCpOs.TaskControl.mayPreempt_perm' depends on axioms: [propext]
+'LeanCpOs.TaskControl.mayPreempt_valid' depends on axioms: [propext]
+'LeanCpOs.TaskControl.mayPreempt_activation_count' depends on axioms: [propext]
+'LeanCpOs.TaskControl.append_activation_count' depends on axioms: [propext]
+'LeanCpOs.TaskControl.append_activation_valid' depends on axioms: [propext]
+'LeanCpOs.TaskControl.drop_current_valid' depends on axioms: [propext]
+'LeanCpOs.TaskControl.activate_valid' depends on axioms: [propext]
+'LeanCpOs.TaskControl.terminate_valid' depends on axioms: [propext]
+'LeanCpOs.TaskControl.chain_self_valid' depends on axioms: [propext]
+'LeanCpOs.TaskControl.chain_valid' depends on axioms: [propext]
+'LeanCpOs.TaskControl.schedule_valid' depends on axioms: [propext]
+'LeanCpOs.TaskControl.getTaskID_valid' does not depend on any axioms
+'LeanCpOs.TaskControl.getTaskState_valid' does not depend on any axioms
+'LeanCpOs.TaskControl.stepPc_valid' depends on axioms: [propext]
+'LeanCpOs.TaskControl.enterISR_valid' does not depend on any axioms
+'LeanCpOs.TaskControl.exitISR_valid' depends on axioms: [propext]
+'LeanCpOs.TaskControl.step_valid' depends on axioms: [propext]
+'LeanCpOs.TaskControl.execute_valid' depends on axioms: [propext]
+'LeanCpOs.TaskControl.reachable_valid' depends on axioms: [propext]
+'LeanCpOs.TaskControl.running_iff' depends on axioms: [propext]
+'LeanCpOs.TaskControl.at_most_one_running' depends on axioms: [propext]
+'LeanCpOs.TaskControl.activate_error_unchanged' depends on axioms: [propext]
+'LeanCpOs.TaskControl.terminate_error_unchanged' depends on axioms: [propext]
+'LeanCpOs.TaskControl.chain_error_unchanged' depends on axioms: [propext]
+'LeanCpOs.TaskControl.schedule_error_unchanged' depends on axioms: [propext]
+'LeanCpOs.TaskControl.getTaskID_unchanged' does not depend on any axioms
+'LeanCpOs.TaskControl.getTaskState_unchanged' does not depend on any axioms
+'LeanCpOs.TaskControl.terminate_success_discards' depends on axioms: [propext]
+'LeanCpOs.TaskControl.chain_success_discards' depends on axioms: [propext]
+'LeanCpOs.TaskControl.mayPreempt_deferred_in_ISR' depends on axioms: [propext]
+'LeanCpOs.TaskControl.mayPreempt_keeps_equal_or_lower' depends on axioms: [propext]
+'LeanCpOs.TaskControl.preemption_preserves_continuation' depends on axioms: [propext]
+'LeanCpOs.TaskControl.higher_priority_is_different_task' depends on axioms: [propext]
+'LeanCpOs.TaskControl.nonpreemptive_keeps_current' depends on axioms: [propext]
+'LeanCpOs.TaskControl.activate_success_in_ISR_queued' depends on axioms: [propext]
+'LeanCpOs.TaskControl.self_chain_restarts_at_limit' depends on axioms: [propext]
+'LeanCpOs.TaskControl.terminate_resource_guard' depends on axioms: [propext]
+'LeanCpOs.TaskControl.chain_resource_guard' depends on axioms: [propext]
+'LeanCpOs.TaskControl.schedule_resource_guard' depends on axioms: [propext]

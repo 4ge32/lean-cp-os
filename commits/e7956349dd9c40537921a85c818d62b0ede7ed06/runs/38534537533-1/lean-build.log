@@ -1,0 +1,10 @@
+✔ [2/11] Built LeanCpOs.Model
+✔ [3/11] Built LeanCpOs.Bridge
+✔ [4/11] Built LeanCpOs.Task.Model
+✔ [5/11] Built LeanCpOs.Task.Scalar
+✔ [6/11] Built LeanCpOs.Task.Protocol
+✔ [7/11] Built LeanCpOs.Proofs
+✔ [8/11] Built LeanCpOs.Task.Proofs
+✔ [9/11] Built LeanCpOs.Task.Semantics
+✔ [10/11] Built LeanCpOs
+Build completed successfully.

@@ -1,0 +1,25 @@
+{
+  "generated_source_counts": [
+    {
+      "file": "build/Model.c",
+      "alloc_ctor": 172,
+      "inc": 33,
+      "dec": 108
+    },
+    {
+      "file": "build/TaskScalar.c",
+      "alloc_ctor": 0,
+      "inc": 0,
+      "dec": 63
+    },
+    {
+      "file": "build/Bridge.c",
+      "alloc_ctor": 4,
+      "inc": 6,
+      "dec": 56
+    }
+  ],
+  "stack_claim": "Compiler per-function frame estimates only; excludes runtime and call-chain maximum. No WCET/stack-bound proof.",
+  "allocation": "M0/general host code uses Lean runtime allocations. Whole-module source counts may include unreachable boxed wrappers. The bounded QEMU scalar image links without heap/runtime symbols; see qemu/symbols.txt and qemu/qemu.json. No allocation claim for general Lean code.",
+  "reentrancy": "Single-core serialized service boundary. Modeled ISR nesting defers dispatch; physical interrupt entry, concurrent entry and allocator IRQ safety are not implemented or proved."
+}
