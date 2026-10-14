@@ -1,0 +1,6 @@
+name = "lean-cp-os"
+version = "0.1.0"
+defaultTargets = ["LeanCpOs"]
+
+[[lean_lib]]
+name = "LeanCpOs"
