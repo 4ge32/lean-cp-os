@@ -1,0 +1,26 @@
+/* Keep mdBook's navigation and themes; tune long Japanese text for reading. */
+:root {
+    --content-max-width: 820px;
+}
+.content { line-height: 1.85; }
+.content h1, .content h2, .content h3 { line-height: 1.45; }
+.content h1 { margin-bottom: 1.1em; }
+.content h2 { margin-top: 2.4em; }
+.content p, .content li { overflow-wrap: anywhere; }
+.content pre { line-height: 1.65; }
+.content code { font-size: .9em; }
+.content table { display: block; overflow-x: auto; font-size: .94em; }
+.content td, .content th { padding: .6em .85em; min-width: 5em; }
+.content details { border: 1px solid var(--table-border-color); border-radius: 5px; padding: .75em 1em; margin: 1.5em 0; }
+.content summary { cursor: pointer; font-weight: 600; }
+.sidebar .chapter { line-height: 1.6; }
+.sidebar .chapter li a { padding-top: 5px; padding-bottom: 5px; }
+.sidebar .chapter .part-title { padding-top: 22px; }
+a:focus-visible, button:focus-visible, summary:focus-visible, input:focus-visible {
+    outline: 3px solid var(--links);
+    outline-offset: 3px;
+}
+@media (max-width: 600px) {
+    .content { padding: 0 18px; }
+    .content h1 { font-size: 1.65em; }
+}

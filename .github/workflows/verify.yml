@@ -49,9 +49,40 @@ jobs:
           path: evidence
           retention-days: 90
           if-no-files-found: error
+  book:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+      - name: Test history-preserving site assembly
+        run: python3 tests/test_book_site.py
+      - name: Install pinned Lean bytes
+        run: bash scripts/bootstrap_lean.sh "$RUNNER_TEMP/lean-cp-book-toolchain"
+      - name: Install pinned mdBook bytes
+        run: bash scripts/bootstrap_mdbook.sh "$RUNNER_TEMP/lean-cp-mdbook"
+      - name: Test Book validators with invalid content and Lean examples
+        run: python3 tests/test_book_checks.py
+      - name: Build the model used by the Book examples
+        run: lake build
+      - name: Check chapters, source links and executable Lean examples
+        run: python3 scripts/check_book.py
+      - name: Build the Book
+        run: '"$RUNNER_TEMP/lean-cp-mdbook/mdbook" build'
+      - name: Check rendered local links
+        run: python3 scripts/check_book.py --html build/book --skip-examples
+      - name: Check Japanese and API search against the generated index
+        run: node tests/test_book_search.cjs build/book
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: book-${{ github.run_id }}-${{ github.run_attempt }}
+          path: build/book
+          retention-days: 90
+          if-no-files-found: error
   archive:
-    needs: verify
-    if: always() && github.event_name != 'pull_request' && github.ref == 'refs/heads/main' && needs.verify.result != 'cancelled'
+    needs: [verify, book]
+    if: always() && github.event_name != 'pull_request' && github.ref == 'refs/heads/main' && needs.verify.result != 'cancelled' && needs.book.result == 'success'
     runs-on: ubuntu-24.04
     permissions:
       contents: write
@@ -63,13 +94,19 @@ jobs:
         with:
           name: evidence-${{ github.run_id }}-${{ github.run_attempt }}
           path: incoming
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
+        with:
+          name: book-${{ github.run_id }}-${{ github.run_attempt }}
+          path: build/book
       - name: Preserve immutable lightweight history
         env:
           GH_TOKEN: ${{ github.token }}
         run: python3 scripts/publish_history.py incoming site
+      - name: Combine the Book with the archived verification history
+        run: python3 scripts/assemble_site.py site build/book published-site
       - uses: actions/upload-pages-artifact@56afc609e74202658d3ffba0e8f6dda462b719fa # v3.0.1
         with:
-          path: site
+          path: published-site
   deploy:
     needs: archive
     if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
@@ -81,6 +118,6 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - name: Deploy verification history
+      - name: Deploy the Book and verification history
         id: deployment
         uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e # v4.0.5
