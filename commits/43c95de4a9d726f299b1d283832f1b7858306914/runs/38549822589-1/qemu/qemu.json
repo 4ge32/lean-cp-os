@@ -1,0 +1,310 @@
+{
+  "id": "T-QEMU-TASK",
+  "status": "passed",
+  "scenarios": 7,
+  "platform": "AArch64 QEMU virt / cortex-a53 / single core",
+  "limitations": [
+    "bounded scalar adapter: 4 tasks, 8 activation frames, priority 0..15",
+    "adapter/model correspondence tested, not formally proved",
+    "AAPCS64 call-boundary switching; no hardware IRQ or SIMD/FPU state",
+    "no compiler, assembly, runtime or machine refinement proof"
+  ],
+  "commands": [
+    [
+      "lean",
+      "--print-prefix"
+    ],
+    [
+      "lean",
+      "--version"
+    ],
+    [
+      "/home/runner/work/_temp/lean-cp-toolchain/lean-4.19.0-linux/bin/clang",
+      "--version"
+    ],
+    [
+      "/home/runner/work/_temp/lean-cp-toolchain/lean-4.19.0-linux/bin/ld.lld",
+      "--version"
+    ],
+    [
+      "/usr/bin/qemu-system-aarch64",
+      "--version"
+    ],
+    [
+      "lake",
+      "env",
+      "lean",
+      "-c",
+      "/home/runner/work/lean-cp-os/lean-cp-os/evidence/commits/43c95de4a9d726f299b1d283832f1b7858306914/runs/38549822589-1/qemu/TaskScalar.c",
+      "LeanCpOs/Task/Scalar.lean"
+    ],
+    [
+      "/home/runner/work/_temp/lean-cp-toolchain/lean-4.19.0-linux/bin/clang",
+      "--target=aarch64-none-elf",
+      "-mcpu=cortex-a53",
+      "-mgeneral-regs-only",
+      "-ffreestanding",
+      "-fno-builtin",
+      "-fno-stack-protector",
+      "-fno-unwind-tables",
+      "-fno-asynchronous-unwind-tables",
+      "-ffunction-sections",
+      "-fdata-sections",
+      "-DNDEBUG",
+      "-O2",
+      "-g",
+      "-isystem",
+      "/home/runner/work/_temp/lean-cp-toolchain/lean-4.19.0-linux/include/clang",
+      "-I/home/runner/work/_temp/lean-cp-toolchain/lean-4.19.0-linux/include",
+      "-Itarget/aarch64",
+      "-c",
+      "/home/runner/work/lean-cp-os/lean-cp-os/evidence/commits/43c95de4a9d726f299b1d283832f1b7858306914/runs/38549822589-1/qemu/TaskScalar.c",
+      "-o",
+      "/home/runner/work/lean-cp-os/lean-cp-os/evidence/commits/43c95de4a9d726f299b1d283832f1b7858306914/runs/38549822589-1/qemu/TaskScalar.o"
+    ],
+    [
+      "/home/runner/work/_temp/lean-cp-toolchain/lean-4.19.0-linux/bin/clang",
+      "--target=aarch64-none-elf",
+      "-mcpu=cortex-a53",
+      "-mgeneral-regs-only",
+      "-ffreestanding",
+      "-fno-builtin",
+      "-fno-stack-protector",
+      "-fno-unwind-tables",
+      "-fno-asynchronous-unwind-tables",
+      "-ffunction-sections",
+      "-fdata-sections",
+      "-DNDEBUG",
+      "-O2",
+      "-g",
+      "-isystem",
+      "/home/runner/work/_temp/lean-cp-toolchain/lean-4.19.0-linux/include/clang",
+      "-I/home/runner/work/_temp/lean-cp-toolchain/lean-4.19.0-linux/include",
+      "-Itarget/aarch64",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-c",
+      "/home/runner/work/lean-cp-os/verify-43c95de4a9d726f299b1d283832f1b7858306914/target/aarch64/runtime.c",
+      "-o",
+      "/home/runner/work/lean-cp-os/lean-cp-os/evidence/commits/43c95de4a9d726f299b1d283832f1b7858306914/runs/38549822589-1/qemu/runtime.o"
+    ],
+    [
+      "/home/runner/work/_temp/lean-cp-toolchain/lean-4.19.0-linux/bin/clang",
+      "--target=aarch64-none-elf",
+      "-mcpu=cortex-a53",
+      "-mgeneral-regs-only",
+      "-ffreestanding",
+      "-fno-builtin",
+      "-fno-stack-protector",
+      "-fno-unwind-tables",
+      "-fno-asynchronous-unwind-tables",
+      "-ffunction-sections",
+      "-fdata-sections",
+      "-DNDEBUG",
+      "-O2",
+      "-g",
+      "-isystem",
+      "/home/runner/work/_temp/lean-cp-toolchain/lean-4.19.0-linux/include/clang",
+      "-I/home/runner/work/_temp/lean-cp-toolchain/lean-4.19.0-linux/include",
+      "-Itarget/aarch64",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-c",
+      "/home/runner/work/lean-cp-os/verify-43c95de4a9d726f299b1d283832f1b7858306914/target/aarch64/tests.c",
+      "-o",
+      "/home/runner/work/lean-cp-os/lean-cp-os/evidence/commits/43c95de4a9d726f299b1d283832f1b7858306914/runs/38549822589-1/qemu/tests.o"
+    ],
+    [
+      "/home/runner/work/_temp/lean-cp-toolchain/lean-4.19.0-linux/bin/clang",
+      "--target=aarch64-none-elf",
+      "-mcpu=cortex-a53",
+      "-mgeneral-regs-only",
+      "-ffreestanding",
+      "-fno-builtin",
+      "-fno-stack-protector",
+      "-fno-unwind-tables",
+      "-fno-asynchronous-unwind-tables",
+      "-ffunction-sections",
+      "-fdata-sections",
+      "-DNDEBUG",
+      "-O2",
+      "-g",
+      "-isystem",
+      "/home/runner/work/_temp/lean-cp-toolchain/lean-4.19.0-linux/include/clang",
+      "-I/home/runner/work/_temp/lean-cp-toolchain/lean-4.19.0-linux/include",
+      "-Itarget/aarch64",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-c",
+      "/home/runner/work/lean-cp-os/verify-43c95de4a9d726f299b1d283832f1b7858306914/target/aarch64/boot.S",
+      "-o",
+      "/home/runner/work/lean-cp-os/lean-cp-os/evidence/commits/43c95de4a9d726f299b1d283832f1b7858306914/runs/38549822589-1/qemu/boot.o"
+    ],
+    [
+      "/home/runner/work/_temp/lean-cp-toolchain/lean-4.19.0-linux/bin/clang",
+      "--target=aarch64-none-elf",
+      "-mcpu=cortex-a53",
+      "-mgeneral-regs-only",
+      "-ffreestanding",
+      "-fno-builtin",
+      "-fno-stack-protector",
+      "-fno-unwind-tables",
+      "-fno-asynchronous-unwind-tables",
+      "-ffunction-sections",
+      "-fdata-sections",
+      "-DNDEBUG",
+      "-O2",
+      "-g",
+      "-isystem",
+      "/home/runner/work/_temp/lean-cp-toolchain/lean-4.19.0-linux/include/clang",
+      "-I/home/runner/work/_temp/lean-cp-toolchain/lean-4.19.0-linux/include",
+      "-Itarget/aarch64",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-c",
+      "/home/runner/work/lean-cp-os/verify-43c95de4a9d726f299b1d283832f1b7858306914/target/aarch64/context.S",
+      "-o",
+      "/home/runner/work/lean-cp-os/lean-cp-os/evidence/commits/43c95de4a9d726f299b1d283832f1b7858306914/runs/38549822589-1/qemu/context.o"
+    ],
+    [
+      "/home/runner/work/_temp/lean-cp-toolchain/lean-4.19.0-linux/bin/ld.lld",
+      "-T",
+      "/home/runner/work/lean-cp-os/verify-43c95de4a9d726f299b1d283832f1b7858306914/target/aarch64/link.ld",
+      "--gc-sections",
+      "-Map=/home/runner/work/lean-cp-os/lean-cp-os/evidence/commits/43c95de4a9d726f299b1d283832f1b7858306914/runs/38549822589-1/qemu/osek-task.map",
+      "-o",
+      "/home/runner/work/lean-cp-os/lean-cp-os/evidence/commits/43c95de4a9d726f299b1d283832f1b7858306914/runs/38549822589-1/qemu/osek-task.elf",
+      "/home/runner/work/lean-cp-os/lean-cp-os/evidence/commits/43c95de4a9d726f299b1d283832f1b7858306914/runs/38549822589-1/qemu/TaskScalar.o",
+      "/home/runner/work/lean-cp-os/lean-cp-os/evidence/commits/43c95de4a9d726f299b1d283832f1b7858306914/runs/38549822589-1/qemu/runtime.o",
+      "/home/runner/work/lean-cp-os/lean-cp-os/evidence/commits/43c95de4a9d726f299b1d283832f1b7858306914/runs/38549822589-1/qemu/tests.o",
+      "/home/runner/work/lean-cp-os/lean-cp-os/evidence/commits/43c95de4a9d726f299b1d283832f1b7858306914/runs/38549822589-1/qemu/boot.o",
+      "/home/runner/work/lean-cp-os/lean-cp-os/evidence/commits/43c95de4a9d726f299b1d283832f1b7858306914/runs/38549822589-1/qemu/context.o"
+    ],
+    [
+      "nm",
+      "/home/runner/work/lean-cp-os/lean-cp-os/evidence/commits/43c95de4a9d726f299b1d283832f1b7858306914/runs/38549822589-1/qemu/osek-task.elf"
+    ],
+    [
+      "nm",
+      "-u",
+      "/home/runner/work/lean-cp-os/lean-cp-os/evidence/commits/43c95de4a9d726f299b1d283832f1b7858306914/runs/38549822589-1/qemu/osek-task.elf"
+    ],
+    [
+      "/usr/bin/qemu-system-aarch64",
+      "-machine",
+      "virt,virtualization=off",
+      "-cpu",
+      "cortex-a53",
+      "-smp",
+      "1",
+      "-m",
+      "128M",
+      "-nographic",
+      "-monitor",
+      "none",
+      "-nic",
+      "none",
+      "-semihosting-config",
+      "enable=on,target=native",
+      "-kernel",
+      "/home/runner/work/lean-cp-os/lean-cp-os/evidence/commits/43c95de4a9d726f299b1d283832f1b7858306914/runs/38549822589-1/qemu/osek-task.elf"
+    ]
+  ],
+  "tools": {
+    "lean": "Lean (version 4.19.0, x86_64-unknown-linux-gnu, commit 6caaee842e94, Release)",
+    "clang": "clang version 15.0.1 (https://github.com/llvm/llvm-project b73d2c8c720a8c8e6e73b11be4e27afa6cb75bdf)",
+    "lld": "LLD 15.0.1 (compatible with GNU linkers)",
+    "qemu": "QEMU emulator version 8.2.2 (Debian 1:8.2.2+ds-0ubuntu1.18)"
+  },
+  "returncode": 0,
+  "checks": [
+    {
+      "name": "preempt-resume-registers-stack",
+      "status": "passed",
+      "trace": [
+        10,
+        20,
+        30,
+        11
+      ]
+    },
+    {
+      "name": "equal-priority-fifo",
+      "status": "passed",
+      "trace": [
+        10,
+        40,
+        11,
+        20,
+        30
+      ]
+    },
+    {
+      "name": "queued-activations-fresh-entry",
+      "status": "passed",
+      "trace": [
+        11,
+        20,
+        12,
+        13
+      ]
+    },
+    {
+      "name": "chain-self-other-nonreturn",
+      "status": "passed",
+      "trace": [
+        10,
+        20,
+        11,
+        21
+      ]
+    },
+    {
+      "name": "nonpreemptive-explicit-schedule",
+      "status": "passed",
+      "trace": [
+        10,
+        11,
+        12,
+        20,
+        30,
+        13
+      ]
+    },
+    {
+      "name": "errors-return-with-state-intact",
+      "status": "passed",
+      "trace": [
+        10
+      ]
+    },
+    {
+      "name": "modeled-isr-defers-dispatch",
+      "status": "passed",
+      "trace": [
+        10,
+        11,
+        12,
+        20,
+        13
+      ]
+    }
+  ],
+  "sha256": {
+    "TaskScalar.c": "2360396289aebc4330ee1c40bd465e60ea2ce592c7758e469fdf07a4c9cc8c9a",
+    "TaskScalar.o": "a0f632ecd6e516cb82cf25b61616cb09c017e93a038fdba580d7fbebc1cb1c2f",
+    "boot.o": "b833d7f4b4b8cd321f4cbf6270a7da4b2e0147d60ef8491385f94c76cacc6b97",
+    "build.log": "0296c3de0f6105b63dbb704d247394aa25ff6774ddb81c96ac69214458c36629",
+    "context.o": "b8ca3dc10a8484a8404abfe31bc3b46aee78e4bd1b773cf3ea2366c66f354831",
+    "osek-task.elf": "a828d4f9698eaed12a28742375c522a65a31353148a29f66d3a3a505082ae8f3",
+    "osek-task.map": "e61973c8d7df5254e1d4c36eb208a7dc06a7d1e16353c37e475f1ef9bb53504d",
+    "runtime.o": "86d175468ecbfd3e7039faf23bcb7ab8ce2989cab1e24f56a56ccdd021287a49",
+    "symbols.txt": "e6eb58bcadcd4318649e1a21bfd6c441818f8e2e3cab778b709296a1e1736d3a",
+    "tests.o": "3bbca0abd2a2f9548878cc4b606bd3cad490e393ef625e9b105d0173163f180e",
+    "uart.log": "2ff6785007bab9abf2b1d7e4c8dd24d53b598947adb58c0b3785a0aa00cb61ea"
+  }
+}

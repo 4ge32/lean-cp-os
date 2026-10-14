@@ -1,0 +1,88 @@
+{
+  "schema_version": 1,
+  "sources": [
+    {
+      "id": "OSEK-OS-2.2.3",
+      "kind": "standard",
+      "version": "2.2.3",
+      "date": "2005-02-17",
+      "url": "http://portal.osek-vdx.org/files/pdf/specs/os223.pdf",
+      "retrieved_url": "https://www.irisa.fr/alf/downloads/puaut/TPNXT/images/os223.pdf",
+      "sha256": "a0bb10b0b1413b3d95a40de117d3bedd3bbb74e2cae23c074c5532a95fa715cf",
+      "verification": "Official release document read from academic mirror; identical SHA256 independently retrieved from pinned GitHub mirror on 2026-10-13. Basic task APIs 13.2.3.1-6, queue 4.3/4.5, ISR dispatch 4.6.1 and call table 12.2.2 reviewed.",
+      "redistribute": false,
+      "rights": "Cover reserves reproduction to written permission; no PDF or extracted text shipped.",
+      "verified_mirror_url": "https://github.com/syfchao/osek_v2-2-3/blob/e70f1eba79d8864f01e45095a3b97d97d63569ba/doc/os223.pdf"
+    },
+    {
+      "id": "ATK2-0010-1.2.2",
+      "kind": "reference-design",
+      "version": "1.2.2",
+      "date": "2017-03-24",
+      "url": "https://www.toppers.jp/docs/tech/ATK2-0010_ATK2_spec_122.pdf",
+      "sha256": "c64ba32e67bd02afe4503adc199dada5cb31acc1a5015da19f8bea304291358d",
+      "verification": "official PDF read",
+      "redistribute": false,
+      "rights": "Page i has document-specific conditions; not bundled. AUTOSAR IP is not licensed by that permission.",
+      "baseline": "AUTOSAR Release 4.0 Revision 3 per https://www.toppers.jp/atk2.html"
+    },
+    {
+      "id": "AUTOSAR-CP-R24-11-OS",
+      "kind": "candidate-standard",
+      "version": "R24-11",
+      "url": "https://www.autosar.org/fileadmin/standards/R24-11/CP/AUTOSAR_CP_SWS_OS.pdf",
+      "sha256": null,
+      "verification": "official indexed section 7.1.2 / page 36 checked; complete PDF download failed HTTP 502/timeouts",
+      "redistribute": false,
+      "rights": "No text bundled; exact OS-document disclaimer not yet fully read. Official partnership guidance checked at https://www.autosar.org/standards/classic-platform and https://www.toppers.jp/autosar.html.",
+      "adoption": "superseded proposal; retained only as historical evidence for LCPO-012, not the current target"
+    },
+    {
+      "id": "PROJECT-M0",
+      "kind": "project-decision",
+      "version": "0.1",
+      "url": "docs/DESIGN.md",
+      "sha256": null,
+      "verification": "identified by repository tree SHA",
+      "redistribute": true,
+      "rights": "Project software license intentionally undecided; public visibility does not select one."
+    },
+    {
+      "id": "ATK2-SC1-1.4.2",
+      "kind": "reference-code",
+      "version": "1.4.2",
+      "date": "2017-03-24",
+      "url": "https://www.toppers.jp/download.cgi/atk2-sc1-1.4.2.tar.gz",
+      "sha256": "ae02b8433f83f77661e8f202101c2b5f6cf8e12aadfe94ab666aef9b527a2e1d",
+      "verification": "Official archive read; task_manage.c ActivateTask/TerminateTask and license header inspected",
+      "file_hashes": {
+        "kernel/task_manage.c": "d176c165c1f056ec89f4175060064206e4d4d4c19ff0b7ca4a35dea76721ff18"
+      },
+      "redistribute": false,
+      "rights": "TOPPERS source/header, binary redistribution notice/report and indemnification conditions; AUTOSAR IP explicitly not licensed. No code copied."
+    },
+    {
+      "id": "AUTOSAR-CP-R25-11-OS",
+      "kind": "target-standard",
+      "version": "R25-11",
+      "url": "https://www.autosar.org/fileadmin/standards/R25-11/CP/AUTOSAR_CP_SWS_OS.pdf",
+      "sha256": null,
+      "verification": "Current formal CP release verified from official release announcement and Classic Platform page on 2026-10-12; OS PDF retrieval timed out; sections and requirement IDs not verified",
+      "redistribute": false,
+      "rights": "OS document disclaimer review pending; no document text or code redistributed. Official CP download guidance is information-only.",
+      "adoption": "selected compatibility target at user request; normative mapping and delta review pending"
+    }
+  ],
+  "baseline_policy": {
+    "checked_on": "2026-10-12",
+    "target": "AUTOSAR-CP-R25-11-OS",
+    "preference": "newest officially released Classic Platform OS specification",
+    "release_evidence": [
+      "https://www.autosar.org/standards/classic-platform",
+      "https://www.autosar.org/news-events/detail/release-r25-11-is-now-available"
+    ],
+    "upgrade_policy": "Pin exact release per commit; inspect document rights, hash bytes, review changed requirements, update trace and rerun proofs/tests before claiming coverage. Do not silently follow latest.",
+    "mapping_status": "not_verified",
+    "implementation_coverage": "OSEK 2.2.3 basic-task subset is the current implementation baseline; R25-11 is a future compatibility mapping, not a conformance claim"
+  }
+}

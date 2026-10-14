@@ -1,0 +1,10 @@
+Preparing worktree (detached HEAD de01c10)
+Preparing worktree (detached HEAD d0c8cf8)
+fatal: Not a valid object name ffffffffffffffffffffffffffffffffffffffff^{commit}
+PASS evidence scenario: batch 2 SHAs
+PASS evidence scenario: first 3 SHAs
+PASS evidence scenario: missing 3 SHAs
+PASS evidence scenario: manual-default 1 SHAs
+PASS evidence scenario: manual-head 1 SHAs
+PASS evidence scenario: manual-history 3 SHAs
+PASS T-EVIDENCE: historical SHAs stay not_run; batch push does not collapse to HEAD

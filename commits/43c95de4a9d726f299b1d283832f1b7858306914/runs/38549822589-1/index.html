@@ -1,0 +1,523 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>Lean CP OS evidence</title><style>body{font:16px system-ui;margin:40px auto;padding:0 20px;max-width:1250px;background:#101820;color:#e7edf4}a{color:#80cfff}h1,h2{color:#fff}table{border-collapse:collapse;width:100%;margin:20px 0}td,th{border:1px solid #415063;padding:9px;text-align:left;vertical-align:top;font-size:14px}code{overflow-wrap:anywhere}small{color:#b9c9d8}.passed,.checked{color:#8ae8b0}.failed{color:#ff9c9c}.not_run,.unproved{color:#ffd483}article{border-top:1px solid #506070;padding:10px 0}.banner{background:#304052;padding:16px}details{margin:12px 0}li{margin:8px 0}</style><body><h1>Lean CP OS — commit evidence</h1><p class="banner">Gate result: <b>passed</b> · Coverage: <b>INCOMPLETE</b> · No BCC1 / SC1 / AUTOSAR conformance claim</p><p>Commit <code>43c95de4a9d726f299b1d283832f1b7858306914</code><br>Tree <code>160305053df88bef8c7c7260a8190f811c2b74b2</code><br>Run 38549822589 / attempt 1<br>Exact commit: True · Source unchanged: True</p><a href="https://github.com/4ge32/lean-cp-os/actions/runs/38549822589">GitHub Actions run</a><p><a href="report.json">report.json</a> · <a href="trace.json">trace.json</a> · <a href="axioms.json">axioms.json</a> · <a href="runtime.json">runtime.json</a> · <a href="SHA256SUMS">SHA256SUMS</a> · <a href="test-results/tests.json">test-results/tests.json</a> · <a href="test-results/task-control.json">test-results/task-control.json</a> · <a href="qemu/qemu.json">qemu/qemu.json</a> · <a href="qemu/uart.log">qemu/uart.log</a></p><h2>Verification gates</h2><table><tr><th>Gate</th><th>State</th><th>Evidence</th></tr><tr><td>lean-version</td><td class="passed">passed</td><td><a href="lean-version.log">lean-version.log</a></td></tr><tr><td>compiler-version</td><td class="passed">passed</td><td><a href="compiler-version.log">compiler-version.log</a></td></tr><tr><td>lean-build</td><td class="passed">passed</td><td><a href="lean-build.log">lean-build.log</a></td></tr><tr><td>prepare-audit</td><td class="passed">passed</td><td><a href="prepare-audit.log">prepare-audit.log</a></td></tr><tr><td>axioms</td><td class="passed">passed</td><td><a href="axioms.log">axioms.log</a></td></tr><tr><td>axiom-audit</td><td class="passed">passed</td><td><a href="axiom-audit.log">axiom-audit.log</a></td></tr><tr><td>generate-model</td><td class="passed">passed</td><td><a href="generate-model.log">generate-model.log</a></td></tr><tr><td>generate-bridge</td><td class="passed">passed</td><td><a href="generate-bridge.log">generate-bridge.log</a></td></tr><tr><td>generate-task-scalar</td><td class="passed">passed</td><td><a href="generate-task-scalar.log">generate-task-scalar.log</a></td></tr><tr><td>compile-model</td><td class="passed">passed</td><td><a href="compile-model.log">compile-model.log</a></td></tr><tr><td>compile-bridge</td><td class="passed">passed</td><td><a href="compile-bridge.log">compile-bridge.log</a></td></tr><tr><td>compile-task-scalar</td><td class="passed">passed</td><td><a href="compile-task-scalar.log">compile-task-scalar.log</a></td></tr><tr><td>compile-host</td><td class="passed">passed</td><td><a href="compile-host.log">compile-host.log</a></td></tr><tr><td>link-host</td><td class="passed">passed</td><td><a href="link-host.log">link-host.log</a></td></tr><tr><td>compile-control</td><td class="passed">passed</td><td><a href="compile-control.log">compile-control.log</a></td></tr><tr><td>link-control</td><td class="passed">passed</td><td><a href="link-control.log">link-control.log</a></td></tr><tr><td>host-and-c-tests</td><td class="passed">passed</td><td><a href="host-and-c-tests.log">host-and-c-tests.log</a></td></tr><tr><td>control-flow</td><td class="passed">passed</td><td><a href="control-flow.log">control-flow.log</a></td></tr><tr><td>compile-task-scalar-host</td><td class="passed">passed</td><td><a href="compile-task-scalar-host.log">compile-task-scalar-host.log</a></td></tr><tr><td>link-task-scalar-host</td><td class="passed">passed</td><td><a href="link-task-scalar-host.log">link-task-scalar-host.log</a></td></tr><tr><td>task-control</td><td class="passed">passed</td><td><a href="task-control.log">task-control.log</a></td></tr><tr><td>qemu-task-control</td><td class="passed">passed</td><td><a href="qemu-task-control.log">qemu-task-control.log</a></td></tr><tr><td>runtime-audit</td><td class="passed">passed</td><td><a href="runtime-audit.log">runtime-audit.log</a></td></tr><tr><td>symbols</td><td class="passed">passed</td><td><a href="symbols.log">symbols.log</a></td></tr><tr><td>evidence-selftests</td><td class="passed">passed</td><td><a href="evidence-selftests.log">evidence-selftests.log</a></td></tr><tr><td>trace</td><td class="passed">passed</td><td><a href="trace.log">trace.log</a></td></tr><tr><td>source-stability</td><td class="passed">passed</td><td>snapshot check</td></tr></table><h2>Requirements → source → proof → generated C → tests</h2><p>Implementation, proof, and test states are independent. “Checked” applies only to the linked theorem statements under their assumptions.</p><article id="LCPO-001"><h3>LCPO-001 — Initial state and finite transition sequences preserve scheduler validity</h3><p>Scope: model-implemented · implementation: implemented · proof: checked · test: passed</p><p>Sources: PROJECT-M0 §M0 state invariant; OSEK-OS-2.2.3 §4.2.2</p><details><summary>Definitions, assumptions, symbols, boundaries and tests</summary><pre>{
+  &quot;definitions&quot;: [
+    &quot;LeanCpOs.Valid&quot;,
+    &quot;LeanCpOs.initial&quot;,
+    &quot;LeanCpOs.schedule&quot;,
+    &quot;LeanCpOs.execute&quot;,
+    &quot;LeanCpOs.transition&quot;
+  ],
+  &quot;theorems&quot;: [
+    &quot;LeanCpOs.initial_valid&quot;,
+    &quot;LeanCpOs.schedule_valid&quot;,
+    &quot;LeanCpOs.activate_preserves&quot;,
+    &quot;LeanCpOs.terminate_preserves&quot;,
+    &quot;LeanCpOs.initial_suspended&quot;,
+    &quot;LeanCpOs.transition_preserves&quot;,
+    &quot;LeanCpOs.execution_preserves&quot;,
+    &quot;LeanCpOs.reachable_valid&quot;
+  ],
+  &quot;assumptions&quot;: [
+    &quot;A-STATIC3&quot;,
+    &quot;A-ATOMIC&quot;,
+    &quot;A-VALID&quot;,
+    &quot;A-TRUST&quot;
+  ],
+  &quot;generated_symbols&quot;: [
+    &quot;l_LeanCpOs_schedule&quot;,
+    &quot;l_LeanCpOs_initial&quot;
+  ],
+  &quot;boundaries&quot;: [
+    &quot;c/bridge.h&quot;,
+    &quot;c/host.c&quot;
+  ],
+  &quot;tests&quot;: [
+    &quot;T-HOST&quot;,
+    &quot;T-C-ABI&quot;,
+    &quot;T-DIFFERENTIAL&quot;
+  ]
+}</pre></details></article><article id="LCPO-002"><h3>LCPO-002 — Running/current/active membership consistency and at most one runner</h3><p>Scope: model-implemented · implementation: implemented · proof: checked · test: passed</p><p>Sources: OSEK-OS-2.2.3 §4.2.2; ATK2-0010-1.2.2 §2.5.1</p><details><summary>Definitions, assumptions, symbols, boundaries and tests</summary><pre>{
+  &quot;definitions&quot;: [
+    &quot;LeanCpOs.State&quot;,
+    &quot;LeanCpOs.Active.get&quot;,
+    &quot;LeanCpOs.taskState&quot;
+  ],
+  &quot;theorems&quot;: [
+    &quot;LeanCpOs.running_current&quot;,
+    &quot;LeanCpOs.at_most_one_running&quot;,
+    &quot;LeanCpOs.active_state_consistent&quot;
+  ],
+  &quot;assumptions&quot;: [
+    &quot;A-STATIC3&quot;,
+    &quot;A-ATOMIC&quot;,
+    &quot;A-VALID&quot;,
+    &quot;A-TRUST&quot;
+  ],
+  &quot;generated_symbols&quot;: [
+    &quot;l_LeanCpOs_taskState&quot;
+  ],
+  &quot;boundaries&quot;: [
+    &quot;c/bridge.h&quot;,
+    &quot;c/host.c&quot;
+  ],
+  &quot;tests&quot;: [
+    &quot;T-HOST&quot;,
+    &quot;T-C-ABI&quot;,
+    &quot;T-DIFFERENTIAL&quot;
+  ]
+}</pre></details></article><article id="LCPO-003"><h3>LCPO-003 — Select an active maximum-priority task and reschedule immediately in model</h3><p>Scope: model-implemented · implementation: implemented · proof: checked · test: passed</p><p>Sources: OSEK-OS-2.2.3 §4.5; 4.6.1; ATK2-0010-1.2.2 §2.5.7; 2.5.8</p><details><summary>Definitions, assumptions, symbols, boundaries and tests</summary><pre>{
+  &quot;definitions&quot;: [
+    &quot;LeanCpOs.select&quot;,
+    &quot;LeanCpOs.priority&quot;,
+    &quot;LeanCpOs.schedule&quot;
+  ],
+  &quot;theorems&quot;: [
+    &quot;LeanCpOs.select_member&quot;,
+    &quot;LeanCpOs.select_highest&quot;,
+    &quot;LeanCpOs.select_none_iff&quot;,
+    &quot;LeanCpOs.preemption&quot;
+  ],
+  &quot;assumptions&quot;: [
+    &quot;A-STATIC3&quot;,
+    &quot;A-ATOMIC&quot;,
+    &quot;A-VALID&quot;,
+    &quot;A-TRUST&quot;
+  ],
+  &quot;generated_symbols&quot;: [
+    &quot;l_LeanCpOs_select&quot;,
+    &quot;l_LeanCpOs_schedule&quot;
+  ],
+  &quot;boundaries&quot;: [
+    &quot;c/bridge.h&quot;,
+    &quot;c/host.c&quot;
+  ],
+  &quot;tests&quot;: [
+    &quot;T-HOST&quot;,
+    &quot;T-C-ABI&quot;,
+    &quot;T-DIFFERENTIAL&quot;
+  ]
+}</pre></details></article><article id="LCPO-004"><h3>LCPO-004 — Activation succeeds only for suspended task; one active instance maximum</h3><p>Scope: model-implemented · implementation: implemented · proof: checked · test: passed</p><p>Sources: OSEK-OS-2.2.3 §13.2.3.1; ATK2-0010-1.2.2 §3.9.4 [COS3213, COS3220, COS3217]; ATK2-SC1-1.4.2 §kernel/task_manage.c::ActivateTask</p><details><summary>Definitions, assumptions, symbols, boundaries and tests</summary><pre>{
+  &quot;definitions&quot;: [
+    &quot;LeanCpOs.activate&quot;
+  ],
+  &quot;theorems&quot;: [
+    &quot;LeanCpOs.activation_success&quot;,
+    &quot;LeanCpOs.activation_limit&quot;
+  ],
+  &quot;assumptions&quot;: [
+    &quot;A-STATIC3&quot;,
+    &quot;A-ATOMIC&quot;,
+    &quot;A-VALID&quot;,
+    &quot;A-TRUST&quot;
+  ],
+  &quot;generated_symbols&quot;: [
+    &quot;l_LeanCpOs_activate&quot;
+  ],
+  &quot;boundaries&quot;: [
+    &quot;c/bridge.h&quot;,
+    &quot;c/host.c&quot;
+  ],
+  &quot;tests&quot;: [
+    &quot;T-HOST&quot;,
+    &quot;T-C-ABI&quot;,
+    &quot;T-DIFFERENTIAL&quot;
+  ]
+}</pre></details></article><article id="LCPO-005"><h3>LCPO-005 — Invalid IDs and duplicate activation leave complete state unchanged</h3><p>Scope: model-implemented · implementation: implemented · proof: checked · test: passed</p><p>Sources: OSEK-OS-2.2.3 §13.2.3.1; ATK2-0010-1.2.2 §3.9.4 [COS3221]</p><details><summary>Definitions, assumptions, symbols, boundaries and tests</summary><pre>{
+  &quot;definitions&quot;: [
+    &quot;LeanCpOs.activate&quot;
+  ],
+  &quot;theorems&quot;: [
+    &quot;LeanCpOs.invalid_activation&quot;,
+    &quot;LeanCpOs.activation_error_frame&quot;
+  ],
+  &quot;assumptions&quot;: [
+    &quot;A-STATIC3&quot;,
+    &quot;A-ATOMIC&quot;,
+    &quot;A-VALID&quot;,
+    &quot;A-TRUST&quot;
+  ],
+  &quot;generated_symbols&quot;: [
+    &quot;l_LeanCpOs_activate&quot;
+  ],
+  &quot;boundaries&quot;: [
+    &quot;c/bridge.h&quot;,
+    &quot;c/host.c&quot;
+  ],
+  &quot;tests&quot;: [
+    &quot;T-HOST&quot;,
+    &quot;T-C-ABI&quot;,
+    &quot;T-DIFFERENTIAL&quot;
+  ]
+}</pre></details></article><article id="LCPO-006"><h3>LCPO-006 — Termination removes current activation and produces a dispatch result</h3><p>Scope: model-implemented · implementation: implemented · proof: checked · test: passed</p><p>Sources: OSEK-OS-2.2.3 §13.2.3.2; ATK2-0010-1.2.2 §3.9.5 [COS3226, COS3230, COS3232]; ATK2-SC1-1.4.2 §kernel/task_manage.c::TerminateTask</p><details><summary>Definitions, assumptions, symbols, boundaries and tests</summary><pre>{
+  &quot;definitions&quot;: [
+    &quot;LeanCpOs.terminate&quot;,
+    &quot;LeanCpOs.Control&quot;
+  ],
+  &quot;theorems&quot;: [
+    &quot;LeanCpOs.termination_dispatch&quot;,
+    &quot;LeanCpOs.termination_suspends&quot;
+  ],
+  &quot;assumptions&quot;: [
+    &quot;A-STATIC3&quot;,
+    &quot;A-ATOMIC&quot;,
+    &quot;A-VALID&quot;,
+    &quot;A-TRUST&quot;
+  ],
+  &quot;generated_symbols&quot;: [
+    &quot;l_LeanCpOs_terminate&quot;
+  ],
+  &quot;boundaries&quot;: [
+    &quot;c/bridge.h&quot;,
+    &quot;c/host.c&quot;,
+    &quot;c/control_flow.c&quot;
+  ],
+  &quot;tests&quot;: [
+    &quot;T-HOST&quot;,
+    &quot;T-C-ABI&quot;,
+    &quot;T-DIFFERENTIAL&quot;,
+    &quot;T-CONTROL&quot;
+  ]
+}</pre></details><p>Host longjmp demonstrated; no CPU/assembly context switch or machine-level non-return proof.</p></article><article id="LCPO-007"><h3>LCPO-007 — Idle termination returns project call-level error without mutation</h3><p>Scope: model-implemented · implementation: implemented · proof: checked · test: passed</p><p>Sources: PROJECT-M0 §Idle API call policy</p><details><summary>Definitions, assumptions, symbols, boundaries and tests</summary><pre>{
+  &quot;definitions&quot;: [
+    &quot;LeanCpOs.terminate&quot;
+  ],
+  &quot;theorems&quot;: [
+    &quot;LeanCpOs.termination_error_frame&quot;
+  ],
+  &quot;assumptions&quot;: [
+    &quot;A-STATIC3&quot;,
+    &quot;A-ATOMIC&quot;,
+    &quot;A-VALID&quot;,
+    &quot;A-TRUST&quot;
+  ],
+  &quot;generated_symbols&quot;: [
+    &quot;l_LeanCpOs_terminate&quot;
+  ],
+  &quot;boundaries&quot;: [
+    &quot;c/bridge.h&quot;,
+    &quot;c/host.c&quot;
+  ],
+  &quot;tests&quot;: [
+    &quot;T-HOST&quot;,
+    &quot;T-C-ABI&quot;,
+    &quot;T-DIFFERENTIAL&quot;,
+    &quot;T-CONTROL&quot;
+  ]
+}</pre></details></article><article id="LCPO-008"><h3>LCPO-008 — Frame condition preserves unrelated activation membership and task state</h3><p>Scope: model-implemented · implementation: implemented · proof: checked · test: passed</p><p>Sources: PROJECT-M0 §Frame conditions</p><details><summary>Definitions, assumptions, symbols, boundaries and tests</summary><pre>{
+  &quot;definitions&quot;: [
+    &quot;LeanCpOs.Active.set&quot;,
+    &quot;LeanCpOs.taskState&quot;
+  ],
+  &quot;theorems&quot;: [
+    &quot;LeanCpOs.activation_other_active&quot;,
+    &quot;LeanCpOs.termination_other_active&quot;,
+    &quot;LeanCpOs.unrelated_task_state&quot;
+  ],
+  &quot;assumptions&quot;: [
+    &quot;A-STATIC3&quot;,
+    &quot;A-ATOMIC&quot;,
+    &quot;A-VALID&quot;,
+    &quot;A-TRUST&quot;
+  ],
+  &quot;generated_symbols&quot;: [
+    &quot;l_LeanCpOs_Active_set&quot;,
+    &quot;l_LeanCpOs_taskState&quot;
+  ],
+  &quot;boundaries&quot;: [
+    &quot;c/bridge.h&quot;,
+    &quot;c/host.c&quot;
+  ],
+  &quot;tests&quot;: [
+    &quot;T-HOST&quot;,
+    &quot;T-C-ABI&quot;,
+    &quot;T-DIFFERENTIAL&quot;
+  ]
+}</pre></details><p>The old/new running task may legitimately change Running/Ready during preemption.</p></article><article id="LCPO-009"><h3>LCPO-009 — Query running task and idle sentinel without mutation</h3><p>Scope: model-implemented · implementation: implemented · proof: checked · test: passed</p><p>Sources: OSEK-OS-2.2.3 §13.2.3.5; ATK2-0010-1.2.2 §3.9.8</p><details><summary>Definitions, assumptions, symbols, boundaries and tests</summary><pre>{
+  &quot;definitions&quot;: [
+    &quot;LeanCpOs.getTaskID&quot;
+  ],
+  &quot;theorems&quot;: [
+    &quot;LeanCpOs.get_id_correct&quot;
+  ],
+  &quot;assumptions&quot;: [
+    &quot;A-STATIC3&quot;,
+    &quot;A-ATOMIC&quot;,
+    &quot;A-VALID&quot;,
+    &quot;A-TRUST&quot;
+  ],
+  &quot;generated_symbols&quot;: [
+    &quot;l_LeanCpOs_getTaskID&quot;
+  ],
+  &quot;boundaries&quot;: [
+    &quot;c/bridge.h&quot;,
+    &quot;c/host.c&quot;
+  ],
+  &quot;tests&quot;: [
+    &quot;T-HOST&quot;,
+    &quot;T-C-ABI&quot;,
+    &quot;T-DIFFERENTIAL&quot;
+  ]
+}</pre></details></article><article id="LCPO-010"><h3>LCPO-010 — Query task state; invalid ID yields ID error and no value</h3><p>Scope: model-implemented · implementation: implemented · proof: checked · test: passed</p><p>Sources: OSEK-OS-2.2.3 §13.2.3.6; ATK2-0010-1.2.2 §3.9.9</p><details><summary>Definitions, assumptions, symbols, boundaries and tests</summary><pre>{
+  &quot;definitions&quot;: [
+    &quot;LeanCpOs.getTaskState&quot;
+  ],
+  &quot;theorems&quot;: [
+    &quot;LeanCpOs.get_state_correct&quot;,
+    &quot;LeanCpOs.get_state_invalid&quot;
+  ],
+  &quot;assumptions&quot;: [
+    &quot;A-STATIC3&quot;,
+    &quot;A-ATOMIC&quot;,
+    &quot;A-VALID&quot;,
+    &quot;A-TRUST&quot;
+  ],
+  &quot;generated_symbols&quot;: [
+    &quot;l_LeanCpOs_getTaskState&quot;
+  ],
+  &quot;boundaries&quot;: [
+    &quot;c/bridge.h&quot;,
+    &quot;c/host.c&quot;
+  ],
+  &quot;tests&quot;: [
+    &quot;T-HOST&quot;,
+    &quot;T-C-ABI&quot;,
+    &quot;T-DIFFERENTIAL&quot;
+  ]
+}</pre></details></article><article id="LCPO-011"><h3>LCPO-011 — Generated C scalar ABI agrees with Lean and independent oracle on tested inputs</h3><p>Scope: partial · implementation: partial · proof: unproved · test: passed</p><p>Sources: PROJECT-M0 §Scalar ABI</p><details><summary>Definitions, assumptions, symbols, boundaries and tests</summary><pre>{
+  &quot;definitions&quot;: [
+    &quot;LeanCpOs.step&quot;,
+    &quot;LeanCpOs.pack&quot;,
+    &quot;LeanCpOs.fromMask&quot;,
+    &quot;LeanCpOs.decodeTask&quot;
+  ],
+  &quot;theorems&quot;: [],
+  &quot;assumptions&quot;: [
+    &quot;A-STATIC3&quot;,
+    &quot;A-ATOMIC&quot;,
+    &quot;A-ABI&quot;,
+    &quot;A-TRUST&quot;
+  ],
+  &quot;generated_symbols&quot;: [
+    &quot;lean_cp_step&quot;,
+    &quot;initialize_LeanCpOs_Bridge&quot;
+  ],
+  &quot;boundaries&quot;: [
+    &quot;c/bridge.h&quot;,
+    &quot;c/host.c&quot;
+  ],
+  &quot;tests&quot;: [
+    &quot;T-HOST&quot;,
+    &quot;T-C-ABI&quot;,
+    &quot;T-DIFFERENTIAL&quot;
+  ]
+}</pre></details><p>Packing, compiler preservation and FFI correctness tested, not formally proved.</p></article><article id="LCPO-012"><h3>LCPO-012 — AUTOSAR OSEK API backwards compatibility</h3><p>Scope: deferred · implementation: unimplemented · proof: unproved · test: not_run</p><p>Sources: AUTOSAR-CP-R24-11-OS §7.1.2 p36 [SWS_Os_00001]</p><details><summary>Definitions, assumptions, symbols, boundaries and tests</summary><pre>{
+  &quot;definitions&quot;: [],
+  &quot;theorems&quot;: [],
+  &quot;assumptions&quot;: [
+    &quot;A-STATIC3&quot;,
+    &quot;A-ATOMIC&quot;,
+    &quot;A-VALID&quot;,
+    &quot;A-TRUST&quot;
+  ],
+  &quot;generated_symbols&quot;: [],
+  &quot;boundaries&quot;: [
+    &quot;c/bridge.h&quot;,
+    &quot;c/host.c&quot;
+  ],
+  &quot;tests&quot;: []
+}</pre></details><p>Broad standard requirement NOT satisfied by scalar test ABI.</p></article><article id="LCPO-013"><h3>LCPO-013 — Configurable basic tasks: FIFO priorities, multiple activation requests, ChainTask and Schedule</h3><p>Scope: model-implemented · implementation: implemented · proof: checked · test: passed</p><p>Sources: OSEK-OS-2.2.3 §4.3; OSEK-OS-2.2.3 §4.5; OSEK-OS-2.2.3 §4.6; OSEK-OS-2.2.3 §13.2.3.1-6</p><details><summary>Definitions, assumptions, symbols, boundaries and tests</summary><pre>{
+  &quot;definitions&quot;: [
+    &quot;LeanCpOs.TaskControl.Config&quot;,
+    &quot;LeanCpOs.TaskControl.Frame&quot;,
+    &quot;LeanCpOs.TaskControl.State&quot;,
+    &quot;LeanCpOs.TaskControl.choose&quot;,
+    &quot;LeanCpOs.TaskControl.activate&quot;,
+    &quot;LeanCpOs.TaskControl.terminate&quot;,
+    &quot;LeanCpOs.TaskControl.chain&quot;,
+    &quot;LeanCpOs.TaskControl.schedule&quot;,
+    &quot;LeanCpOs.TaskControl.getTaskID&quot;,
+    &quot;LeanCpOs.TaskControl.getTaskState&quot;
+  ],
+  &quot;theorems&quot;: [
+    &quot;LeanCpOs.TaskControl.activate_error_unchanged&quot;,
+    &quot;LeanCpOs.TaskControl.terminate_error_unchanged&quot;,
+    &quot;LeanCpOs.TaskControl.chain_error_unchanged&quot;,
+    &quot;LeanCpOs.TaskControl.schedule_error_unchanged&quot;,
+    &quot;LeanCpOs.TaskControl.getTaskID_unchanged&quot;,
+    &quot;LeanCpOs.TaskControl.getTaskState_unchanged&quot;,
+    &quot;LeanCpOs.TaskControl.terminate_success_discards&quot;,
+    &quot;LeanCpOs.TaskControl.chain_success_discards&quot;,
+    &quot;LeanCpOs.TaskControl.mayPreempt_deferred_in_ISR&quot;,
+    &quot;LeanCpOs.TaskControl.mayPreempt_keeps_equal_or_lower&quot;,
+    &quot;LeanCpOs.TaskControl.preemption_preserves_continuation&quot;,
+    &quot;LeanCpOs.TaskControl.higher_priority_is_different_task&quot;,
+    &quot;LeanCpOs.TaskControl.nonpreemptive_keeps_current&quot;,
+    &quot;LeanCpOs.TaskControl.activate_success_in_ISR_queued&quot;,
+    &quot;LeanCpOs.TaskControl.self_chain_restarts_at_limit&quot;,
+    &quot;LeanCpOs.TaskControl.terminate_resource_guard&quot;,
+    &quot;LeanCpOs.TaskControl.chain_resource_guard&quot;,
+    &quot;LeanCpOs.TaskControl.schedule_resource_guard&quot;
+  ],
+  &quot;assumptions&quot;: [
+    &quot;A-BASIC&quot;,
+    &quot;A-CALLER&quot;,
+    &quot;A-TRUST&quot;
+  ],
+  &quot;generated_symbols&quot;: [],
+  &quot;boundaries&quot;: [],
+  &quot;tests&quot;: [
+    &quot;T-TASK-CONTROL&quot;
+  ]
+}</pre></details></article><article id="LCPO-014"><h3>LCPO-014 — Extended tasks, events, resources and priority ceiling</h3><p>Scope: deferred · implementation: unimplemented · proof: unproved · test: not_run</p><p>Sources: PROJECT-M0 §Deferred scope</p><details><summary>Definitions, assumptions, symbols, boundaries and tests</summary><pre>{
+  &quot;definitions&quot;: [],
+  &quot;theorems&quot;: [],
+  &quot;assumptions&quot;: [
+    &quot;A-STATIC3&quot;,
+    &quot;A-ATOMIC&quot;,
+    &quot;A-VALID&quot;,
+    &quot;A-TRUST&quot;
+  ],
+  &quot;generated_symbols&quot;: [],
+  &quot;boundaries&quot;: [
+    &quot;c/bridge.h&quot;,
+    &quot;c/host.c&quot;
+  ],
+  &quot;tests&quot;: []
+}</pre></details></article><article id="LCPO-015"><h3>LCPO-015 — Alarms, counters, interrupts and timing services</h3><p>Scope: deferred · implementation: unimplemented · proof: unproved · test: not_run</p><p>Sources: PROJECT-M0 §Deferred scope</p><details><summary>Definitions, assumptions, symbols, boundaries and tests</summary><pre>{
+  &quot;definitions&quot;: [],
+  &quot;theorems&quot;: [],
+  &quot;assumptions&quot;: [
+    &quot;A-STATIC3&quot;,
+    &quot;A-ATOMIC&quot;,
+    &quot;A-VALID&quot;,
+    &quot;A-TRUST&quot;
+  ],
+  &quot;generated_symbols&quot;: [],
+  &quot;boundaries&quot;: [
+    &quot;c/bridge.h&quot;,
+    &quot;c/host.c&quot;
+  ],
+  &quot;tests&quot;: []
+}</pre></details></article><article id="LCPO-016"><h3>LCPO-016 — Multicore, protection, hooks and full API call-level rules</h3><p>Scope: deferred · implementation: unimplemented · proof: unproved · test: not_run</p><p>Sources: PROJECT-M0 §Deferred scope</p><details><summary>Definitions, assumptions, symbols, boundaries and tests</summary><pre>{
+  &quot;definitions&quot;: [],
+  &quot;theorems&quot;: [],
+  &quot;assumptions&quot;: [
+    &quot;A-STATIC3&quot;,
+    &quot;A-ATOMIC&quot;,
+    &quot;A-VALID&quot;,
+    &quot;A-TRUST&quot;
+  ],
+  &quot;generated_symbols&quot;: [],
+  &quot;boundaries&quot;: [
+    &quot;c/bridge.h&quot;,
+    &quot;c/host.c&quot;
+  ],
+  &quot;tests&quot;: []
+}</pre></details></article><article id="LCPO-017"><h3>LCPO-017 — Liveness, starvation freedom, WCET and bounded memory/stack</h3><p>Scope: deferred · implementation: unimplemented · proof: unproved · test: not_run</p><p>Sources: PROJECT-M0 §Deferred scope</p><details><summary>Definitions, assumptions, symbols, boundaries and tests</summary><pre>{
+  &quot;definitions&quot;: [],
+  &quot;theorems&quot;: [],
+  &quot;assumptions&quot;: [
+    &quot;A-STATIC3&quot;,
+    &quot;A-ATOMIC&quot;,
+    &quot;A-VALID&quot;,
+    &quot;A-TRUST&quot;
+  ],
+  &quot;generated_symbols&quot;: [],
+  &quot;boundaries&quot;: [
+    &quot;c/bridge.h&quot;,
+    &quot;c/host.c&quot;
+  ],
+  &quot;tests&quot;: []
+}</pre></details></article><article id="LCPO-018"><h3>LCPO-018 — AArch64 boot, actual task context switching and generated-C decisions; machine refinement remains unproved</h3><p>Scope: partial · implementation: partial · proof: unproved · test: passed</p><p>Sources: PROJECT-M0 §Deferred scope</p><details><summary>Definitions, assumptions, symbols, boundaries and tests</summary><pre>{
+  &quot;definitions&quot;: [],
+  &quot;theorems&quot;: [],
+  &quot;assumptions&quot;: [
+    &quot;A-TARGET&quot;,
+    &quot;A-TRUST&quot;
+  ],
+  &quot;generated_symbols&quot;: [],
+  &quot;boundaries&quot;: [
+    &quot;c/bridge.h&quot;,
+    &quot;c/host.c&quot;
+  ],
+  &quot;tests&quot;: [
+    &quot;T-QEMU-TASK&quot;
+  ]
+}</pre></details></article><article id="LCPO-019"><h3>LCPO-019 — Enumerate every introduced SHA and preserve failed/not_run historical evidence</h3><p>Scope: partial · implementation: partial · proof: unproved · test: passed</p><p>Sources: PROJECT-M0 §Every-commit evidence</p><details><summary>Definitions, assumptions, symbols, boundaries and tests</summary><pre>{
+  &quot;definitions&quot;: [],
+  &quot;theorems&quot;: [],
+  &quot;assumptions&quot;: [
+    &quot;A-TRUST&quot;
+  ],
+  &quot;generated_symbols&quot;: [],
+  &quot;boundaries&quot;: [],
+  &quot;tests&quot;: [
+    &quot;T-EVIDENCE&quot;
+  ]
+}</pre></details><p>Local fixtures exercised; remote Actions/Pages still not executed.</p></article><article id="LCPO-020"><h3>LCPO-020 — Generic configuration: valid task identities and activation limits preserved across arbitrary finite service sequences</h3><p>Scope: model-implemented · implementation: implemented · proof: checked · test: passed</p><p>Sources: OSEK-OS-2.2.3 §4.3; OSEK-OS-2.2.3 §4.5; OSEK-OS-2.2.3 §13.2.3.1-6</p><details><summary>Definitions, assumptions, symbols, boundaries and tests</summary><pre>{
+  &quot;definitions&quot;: [
+    &quot;LeanCpOs.TaskControl.Valid&quot;,
+    &quot;LeanCpOs.TaskControl.activeCount&quot;,
+    &quot;LeanCpOs.TaskControl.step&quot;,
+    &quot;LeanCpOs.TaskControl.execute&quot;
+  ],
+  &quot;theorems&quot;: [
+    &quot;LeanCpOs.TaskControl.choose_none_iff&quot;,
+    &quot;LeanCpOs.TaskControl.choose_perm&quot;,
+    &quot;LeanCpOs.TaskControl.choose_highest&quot;,
+    &quot;LeanCpOs.TaskControl.choose_fifo_head&quot;,
+    &quot;LeanCpOs.TaskControl.initial_valid&quot;,
+    &quot;LeanCpOs.TaskControl.perm_countP&quot;,
+    &quot;LeanCpOs.TaskControl.valid_of_perm&quot;,
+    &quot;LeanCpOs.TaskControl.dispatch_perm&quot;,
+    &quot;LeanCpOs.TaskControl.dispatch_valid&quot;,
+    &quot;LeanCpOs.TaskControl.mayPreempt_perm&quot;,
+    &quot;LeanCpOs.TaskControl.mayPreempt_valid&quot;,
+    &quot;LeanCpOs.TaskControl.mayPreempt_activation_count&quot;,
+    &quot;LeanCpOs.TaskControl.append_activation_count&quot;,
+    &quot;LeanCpOs.TaskControl.append_activation_valid&quot;,
+    &quot;LeanCpOs.TaskControl.drop_current_valid&quot;,
+    &quot;LeanCpOs.TaskControl.activate_valid&quot;,
+    &quot;LeanCpOs.TaskControl.terminate_valid&quot;,
+    &quot;LeanCpOs.TaskControl.chain_self_valid&quot;,
+    &quot;LeanCpOs.TaskControl.chain_valid&quot;,
+    &quot;LeanCpOs.TaskControl.schedule_valid&quot;,
+    &quot;LeanCpOs.TaskControl.getTaskID_valid&quot;,
+    &quot;LeanCpOs.TaskControl.getTaskState_valid&quot;,
+    &quot;LeanCpOs.TaskControl.stepPc_valid&quot;,
+    &quot;LeanCpOs.TaskControl.enterISR_valid&quot;,
+    &quot;LeanCpOs.TaskControl.exitISR_valid&quot;,
+    &quot;LeanCpOs.TaskControl.step_valid&quot;,
+    &quot;LeanCpOs.TaskControl.execute_valid&quot;,
+    &quot;LeanCpOs.TaskControl.reachable_valid&quot;,
+    &quot;LeanCpOs.TaskControl.running_iff&quot;,
+    &quot;LeanCpOs.TaskControl.at_most_one_running&quot;
+  ],
+  &quot;assumptions&quot;: [
+    &quot;A-BASIC&quot;,
+    &quot;A-CALLER&quot;,
+    &quot;A-TRUST&quot;
+  ],
+  &quot;generated_symbols&quot;: [],
+  &quot;boundaries&quot;: [],
+  &quot;tests&quot;: [
+    &quot;T-TASK-CONTROL&quot;
+  ]
+}</pre></details></article><article id="LCPO-021"><h3>LCPO-021 — Bounded generated-C adapter agrees with generic Lean and independent oracle for tested sequences</h3><p>Scope: partial · implementation: partial · proof: unproved · test: passed</p><p>Sources: OSEK-OS-2.2.3 §4.3; OSEK-OS-2.2.3 §4.5; OSEK-OS-2.2.3 §13.2.3.1-6</p><details><summary>Definitions, assumptions, symbols, boundaries and tests</summary><pre>{
+  &quot;definitions&quot;: [
+    &quot;LeanCpOs.Task.Scalar.step&quot;
+  ],
+  &quot;theorems&quot;: [],
+  &quot;assumptions&quot;: [
+    &quot;A-BASIC&quot;,
+    &quot;A-CALLER&quot;,
+    &quot;A-TARGET&quot;,
+    &quot;A-TRUST&quot;
+  ],
+  &quot;generated_symbols&quot;: [
+    &quot;lean_osek_step&quot;
+  ],
+  &quot;boundaries&quot;: [],
+  &quot;tests&quot;: [
+    &quot;T-TASK-SCALAR&quot;
+  ]
+}</pre></details></article><h2>Axiom dependencies</h2><table><tr><th>Theorem</th><th>Axioms</th></tr><tr><td>LeanCpOs.initial_valid</td><td>none</td></tr><tr><td>LeanCpOs.schedule_valid</td><td>none</td></tr><tr><td>LeanCpOs.select_member</td><td>none</td></tr><tr><td>LeanCpOs.select_highest</td><td>none</td></tr><tr><td>LeanCpOs.select_none_iff</td><td>none</td></tr><tr><td>LeanCpOs.activate_preserves</td><td>propext</td></tr><tr><td>LeanCpOs.terminate_preserves</td><td>none</td></tr><tr><td>LeanCpOs.running_current</td><td>propext</td></tr><tr><td>LeanCpOs.at_most_one_running</td><td>propext</td></tr><tr><td>LeanCpOs.active_state_consistent</td><td>propext</td></tr><tr><td>LeanCpOs.activation_limit</td><td>propext</td></tr><tr><td>LeanCpOs.invalid_activation</td><td>none</td></tr><tr><td>LeanCpOs.activation_error_frame</td><td>propext</td></tr><tr><td>LeanCpOs.activation_success</td><td>propext</td></tr><tr><td>LeanCpOs.activation_other_active</td><td>propext</td></tr><tr><td>LeanCpOs.preemption</td><td>propext</td></tr><tr><td>LeanCpOs.termination_dispatch</td><td>propext</td></tr><tr><td>LeanCpOs.termination_suspends</td><td>propext</td></tr><tr><td>LeanCpOs.termination_other_active</td><td>propext</td></tr><tr><td>LeanCpOs.termination_error_frame</td><td>propext</td></tr><tr><td>LeanCpOs.unrelated_task_state</td><td>propext</td></tr><tr><td>LeanCpOs.get_id_correct</td><td>none</td></tr><tr><td>LeanCpOs.get_state_correct</td><td>none</td></tr><tr><td>LeanCpOs.get_state_invalid</td><td>none</td></tr><tr><td>LeanCpOs.initial_suspended</td><td>none</td></tr><tr><td>LeanCpOs.transition_preserves</td><td>propext</td></tr><tr><td>LeanCpOs.execution_preserves</td><td>propext</td></tr><tr><td>LeanCpOs.reachable_valid</td><td>propext</td></tr><tr><td>LeanCpOs.TaskControl.choose_none_iff</td><td>propext</td></tr><tr><td>LeanCpOs.TaskControl.choose_perm</td><td>propext</td></tr><tr><td>LeanCpOs.TaskControl.choose_highest</td><td>propext</td></tr><tr><td>LeanCpOs.TaskControl.choose_fifo_head</td><td>propext</td></tr><tr><td>LeanCpOs.TaskControl.initial_valid</td><td>none</td></tr><tr><td>LeanCpOs.TaskControl.perm_countP</td><td>propext</td></tr><tr><td>LeanCpOs.TaskControl.valid_of_perm</td><td>propext</td></tr><tr><td>LeanCpOs.TaskControl.dispatch_perm</td><td>propext</td></tr><tr><td>LeanCpOs.TaskControl.dispatch_valid</td><td>propext</td></tr><tr><td>LeanCpOs.TaskControl.mayPreempt_perm</td><td>propext</td></tr><tr><td>LeanCpOs.TaskControl.mayPreempt_valid</td><td>propext</td></tr><tr><td>LeanCpOs.TaskControl.mayPreempt_activation_count</td><td>propext</td></tr><tr><td>LeanCpOs.TaskControl.append_activation_count</td><td>propext</td></tr><tr><td>LeanCpOs.TaskControl.append_activation_valid</td><td>propext</td></tr><tr><td>LeanCpOs.TaskControl.drop_current_valid</td><td>propext</td></tr><tr><td>LeanCpOs.TaskControl.activate_valid</td><td>propext</td></tr><tr><td>LeanCpOs.TaskControl.terminate_valid</td><td>propext</td></tr><tr><td>LeanCpOs.TaskControl.chain_self_valid</td><td>propext</td></tr><tr><td>LeanCpOs.TaskControl.chain_valid</td><td>propext</td></tr><tr><td>LeanCpOs.TaskControl.schedule_valid</td><td>propext</td></tr><tr><td>LeanCpOs.TaskControl.getTaskID_valid</td><td>none</td></tr><tr><td>LeanCpOs.TaskControl.getTaskState_valid</td><td>none</td></tr><tr><td>LeanCpOs.TaskControl.stepPc_valid</td><td>propext</td></tr><tr><td>LeanCpOs.TaskControl.enterISR_valid</td><td>none</td></tr><tr><td>LeanCpOs.TaskControl.exitISR_valid</td><td>propext</td></tr><tr><td>LeanCpOs.TaskControl.step_valid</td><td>propext</td></tr><tr><td>LeanCpOs.TaskControl.execute_valid</td><td>propext</td></tr><tr><td>LeanCpOs.TaskControl.reachable_valid</td><td>propext</td></tr><tr><td>LeanCpOs.TaskControl.running_iff</td><td>propext</td></tr><tr><td>LeanCpOs.TaskControl.at_most_one_running</td><td>propext</td></tr><tr><td>LeanCpOs.TaskControl.activate_error_unchanged</td><td>propext</td></tr><tr><td>LeanCpOs.TaskControl.terminate_error_unchanged</td><td>propext</td></tr><tr><td>LeanCpOs.TaskControl.chain_error_unchanged</td><td>propext</td></tr><tr><td>LeanCpOs.TaskControl.schedule_error_unchanged</td><td>propext</td></tr><tr><td>LeanCpOs.TaskControl.getTaskID_unchanged</td><td>none</td></tr><tr><td>LeanCpOs.TaskControl.getTaskState_unchanged</td><td>none</td></tr><tr><td>LeanCpOs.TaskControl.terminate_success_discards</td><td>propext</td></tr><tr><td>LeanCpOs.TaskControl.chain_success_discards</td><td>propext</td></tr><tr><td>LeanCpOs.TaskControl.mayPreempt_deferred_in_ISR</td><td>propext</td></tr><tr><td>LeanCpOs.TaskControl.mayPreempt_keeps_equal_or_lower</td><td>propext</td></tr><tr><td>LeanCpOs.TaskControl.preemption_preserves_continuation</td><td>propext</td></tr><tr><td>LeanCpOs.TaskControl.higher_priority_is_different_task</td><td>propext</td></tr><tr><td>LeanCpOs.TaskControl.nonpreemptive_keeps_current</td><td>propext</td></tr><tr><td>LeanCpOs.TaskControl.activate_success_in_ISR_queued</td><td>propext</td></tr><tr><td>LeanCpOs.TaskControl.self_chain_restarts_at_limit</td><td>propext</td></tr><tr><td>LeanCpOs.TaskControl.terminate_resource_guard</td><td>propext</td></tr><tr><td>LeanCpOs.TaskControl.chain_resource_guard</td><td>propext</td></tr><tr><td>LeanCpOs.TaskControl.schedule_resource_guard</td><td>propext</td></tr></table><h2>Open gaps</h2><ul><li>LCPO-011: no checked proof for this boundary</li><li>LCPO-012: deferred/unimplemented/unproved/not_run</li><li>LCPO-012: source PDF hash unavailable: AUTOSAR-CP-R24-11-OS</li><li>LCPO-012: tests not_run</li><li>LCPO-014: deferred/unimplemented/unproved/not_run</li><li>LCPO-014: tests not_run</li><li>LCPO-015: deferred/unimplemented/unproved/not_run</li><li>LCPO-015: tests not_run</li><li>LCPO-016: deferred/unimplemented/unproved/not_run</li><li>LCPO-016: tests not_run</li><li>LCPO-017: deferred/unimplemented/unproved/not_run</li><li>LCPO-017: tests not_run</li><li>LCPO-018: no checked proof for this boundary</li><li>LCPO-019: no checked proof for this boundary</li><li>LCPO-021: no checked proof for this boundary</li></ul><h2>Proof / runtime limits</h2><ul><li>Single-core basic-task subset; no full OSEK/BCC/SC1/AUTOSAR conformance</li><li>Generic Lean model and bounded generated-C target adapter are compared by tests; no compiler/adapter/assembly refinement proof</li><li>No liveness, WCET, full IRQ or resource-subsystem proof</li><li>Source snapshot checked at beginning/end; not an adversarial concurrent-write monitor</li></ul></body></html>
