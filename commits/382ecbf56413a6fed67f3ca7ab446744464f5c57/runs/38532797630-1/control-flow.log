@@ -1,0 +1,1 @@
+PASS T-CONTROL: high -> low -> idle; successful termination did not return; idle error returned

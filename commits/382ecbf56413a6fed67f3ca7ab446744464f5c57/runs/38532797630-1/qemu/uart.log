@@ -1,0 +1,16 @@
+Lean OSEK basic-task target: AArch64 virt / cortex-a53
+TRACE preempt-resume-registers-stack: 10 20 30 11
+PASS preempt-resume-registers-stack
+TRACE equal-priority-fifo: 10 40 11 20 30
+PASS equal-priority-fifo
+TRACE queued-activations-fresh-entry: 11 20 12 13
+PASS queued-activations-fresh-entry
+TRACE chain-self-other-nonreturn: 10 20 11 21
+PASS chain-self-other-nonreturn
+TRACE nonpreemptive-explicit-schedule: 10 11 12 20 30 13
+PASS nonpreemptive-explicit-schedule
+TRACE errors-return-with-state-intact: 10
+PASS errors-return-with-state-intact
+TRACE modeled-isr-defers-dispatch: 10 11 12 20 13
+PASS modeled-isr-defers-dispatch
+PASS QEMU: 7 scenarios; real task stacks; generated Lean decisions

@@ -1,0 +1,39 @@
+{
+  "id": "T-TASK-CONTROL",
+  "status": "passed",
+  "traces": 9815,
+  "transitions": 74056,
+  "exhaustive_traces": 9604,
+  "exhaustive_depth": 4,
+  "random_seed": 20261013,
+  "returncode": 0,
+  "actual_count": 74056,
+  "scenarios": [
+    "preempt_resume_restart",
+    "equal_priority_fifo_and_saved_instance",
+    "nonpreemptive_explicit_schedule",
+    "schedule_does_not_round_robin",
+    "chain_atomic_error_and_self_at_limit",
+    "self_chain_joins_fifo_tail",
+    "nested_isr_defers_dispatch",
+    "isr_return_respects_nonpreemptive",
+    "resource_guard_preserves_state",
+    "idle_queries_and_invalid_calls",
+    "sixty_four_tasks"
+  ],
+  "protocol": {
+    "status": "passed",
+    "cases": 12,
+    "expected": null,
+    "actual": null
+  },
+  "scalar": {
+    "id": "T-TASK-SCALAR",
+    "status": "passed",
+    "vectors": 62991,
+    "returncode": 0,
+    "actual_count": 62991,
+    "mismatches": []
+  },
+  "mismatches": []
+}
