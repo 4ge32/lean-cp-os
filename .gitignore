@@ -5,3 +5,6 @@ __pycache__/
 *.pyc
 
 .toolchain/
+work/
+site/
+published-site/

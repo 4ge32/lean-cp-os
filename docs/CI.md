@@ -28,15 +28,46 @@ Run IDs and attempts are part of every path: `commits/<SHA>/runs/<run-id>-<attem
 
 ## Publication model and permissions
 
-Verification gets only `contents: read`, no persisted checkout credentials, no project secrets and no privileged PR workflow. The trusted `main` archive job alone has `contents: write`; it appends lightweight reports to a dedicated `evidence-history` branch. That job publishes no PR artifact and refuses to overwrite an existing run. No branch history is force-pushed. No shared workflow concurrency group is used: even a non-cancelling group can replace queued runs. Concurrent history appends retry optimistic non-fast-forward conflicts without force-pushing. The deploy job has only `pages: write` and `id-token: write` and uses the `github-pages` environment. First-party Actions are pinned to verified immutable tag SHAs.
+Verification and Book builds get only `contents: read`, no persisted checkout credentials, no project secrets and no privileged PR workflow. The trusted `main` archive job alone has `contents: write`; it appends lightweight reports to a dedicated `evidence-history` branch. That job publishes no PR artifact and refuses to overwrite an existing run. No branch history is force-pushed. No shared workflow concurrency group is used: even a non-cancelling group can replace queued runs. Concurrent history appends retry optimistic non-fast-forward conflicts without force-pushing. The deploy job has only `pages: write` and `id-token: write` and uses the `github-pages` environment. First-party Actions are pinned to verified immutable tag SHAs.
 
-`evidence-history` retains JSON/logs/generated C/stack reports across Pages deployments. Full compiled binaries and `.olean` files remain in run-specific Actions artifacts; the report hashes them and links the workflow run. Pages `latest.json` selects the newest recorded run ID/attempt; it does not assert that a newer unverified main HEAD has completed. It is an explicit pointer, not a replacement for historical results. Failed verification is also eligible for publication, so the latest failed result is not hidden behind an older green page.
+`evidence-history` retains JSON/logs/generated C/stack reports across Pages deployments. Full compiled binaries and `.olean` files remain in run-specific Actions artifacts; the report hashes them and links the workflow run. Pages `latest.json` selects the newest recorded run ID/attempt; it does not assert that a newer unverified main HEAD has completed. It is an explicit pointer, not a replacement for historical results. Failed verification is also eligible for publication when the Book build succeeds, so verification failures do not on their own hide the latest result behind an older green page. A failed Book build prevents this workflow's archive and deployment jobs; verification artifacts still retain their results.
 
-## Publication bootstrap — pending
+## Book build and site assembly
 
-1. Confirm ownership/access and create **public** `4ge32/lean-cp-os` only if absent. A 404 from the connector does not exclude a private inaccessible repository. Inspect any existing contents before choosing a branch or integrating changes.
-2. Review the source-license choice separately; this repository deliberately has no software license grant yet.
-3. Push the local main commit without force. Enable Actions; configure Settings → Pages → source **GitHub Actions** and restrict the `github-pages` environment to main.
-4. Run/observe the workflow. Verify the remote SHA, exact target list, every evidence result, artifact/run linkage, history branch and actual returned Pages deployment URL.
+The `book` job runs on both pull requests and main. It installs the pinned Lean
+toolchain and mdBook release, checks the publication assembler, builds the Lean
+model, checks the Book's source links and Lean examples, and builds
+`docs/book/` into `build/book/`. Rendered local links are checked before the
+run-specific `book-<run-id>-<attempt>` artifact is uploaded. The mdBook bootstrap
+checks the downloaded release's SHA256, as does the Lean bootstrap.
+`tests/test_book_checks.py` uses isolated broken-link/include/anchor fixtures
+and a false Lean `#guard` to confirm that these checks actually fail when the
+Book is invalid.
+`tests/test_book_search.cjs` uses Node.js and the generated search index to
+check Japanese substring searches, API names, mixed queries and result links.
+The browser keeps mdBook's search UI and keyboard navigation; Japanese queries
+use normalized substring matching because the default tokenizer targets English.
 
-This environment cannot complete steps 1–4: the connected repository API lacks create/Pages-settings operations, and browser access for creation was explicitly denied. No remote URL, Actions success or Pages deployment is claimed. The workflow configuration has local structural/scenario checks only; remote behavior remains unexecuted.
+On main, `archive` waits for both jobs and requires a successful Book build.
+`publish_history.py` first appends the evidence and pushes `evidence-history`,
+using its original archive format. Then `assemble_site.py site build/book
+published-site` copies the history and the fresh Book into a separate output.
+The Book is served at the Pages root; the previous history index is available
+at `verification/index.html`. Its base URL preserves its evidence links.
+Existing `commits/**`, `runs/**`, and `latest.json` URLs and bytes are retained.
+The Book chapter `verification.html` explains how to read the reports and links
+to the separate history index.
+
+Book assets are never committed to `evidence-history`. Assembly refuses path
+collisions, Git metadata, symbolic links and an existing output directory. It
+stages the complete site before exposing the output, so a failed copy cannot
+leave a partial site for upload. Every deployment starts with a fresh Book;
+removed chapters and assets are not carried over from an earlier deployment.
+`tests/test_book_site.py` covers preserved evidence links and bytes, failed-run
+reports, collisions, stale output, input isolation and copy failures.
+
+The public site is <https://4ge32.github.io/lean-cp-os/>. GitHub Pages must use
+the **GitHub Actions** source, with the `github-pages` environment restricted
+to main. For a deployment, check the workflow's target list, evidence and Book
+artifacts, history branch, deployment status and returned Pages URL. A local
+Book build alone does not establish that the site has been deployed.

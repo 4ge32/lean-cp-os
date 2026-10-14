@@ -1,0 +1,30 @@
+[book]
+title = "Lean CP OS Book"
+description = "小さな OS を動かしながら AUTOSAR CP、Lean、実装と保守を学ぶ"
+language = "ja"
+src = "docs/book"
+
+[build]
+build-dir = "build/book"
+create-missing = false
+
+[output.html]
+default-theme = "light"
+preferred-dark-theme = "navy"
+git-repository-url = "https://github.com/4ge32/lean-cp-os"
+edit-url-template = "https://github.com/4ge32/lean-cp-os/edit/main/{path}"
+site-url = "/lean-cp-os/"
+additional-css = ["docs/book/assets/book.css"]
+additional-js = ["docs/book/assets/enhancements.js"]
+
+[output.html.search]
+enable = true
+limit-results = 30
+use-boolean-and = true
+
+[output.html.playground]
+editable = false
+copyable = true
+
+[output.html.print]
+enable = true

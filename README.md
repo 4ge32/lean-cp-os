@@ -2,6 +2,8 @@
 
 ## はじめて読む方へ
 
+**[Lean CP OS Book を読む](https://4ge32.github.io/lean-cp-os/)** — 小さな OS を動かしながら AUTOSAR CP、Lean、リポジトリの構造と保守を学ぶ、全10章の日本語教材です。[検証履歴](https://4ge32.github.io/lean-cp-os/verification/index.html)からコミットごとの実行結果も参照できます。
+
 このプロジェクトは、OS の「次にどの仕事を動かすか」を Lean で実装し、証明と実行テストの両方で確かめるプロジェクトです。3 タスクの入門用モデルから始め、設定可能な基本タスク制御と、QEMU 上での実際のタスク切り替えへ進みます。
 
 まず [日本語の入門ガイド](docs/GETTING_STARTED.ja.md)で、タスクの動きと「証明・テストの違い」を追ってみてください。OS や Lean の予備知識は必要ありません。その後、下の実行手順、設計資料、検証結果の順に進めます。
@@ -71,6 +73,23 @@ The verifier requires a clean committed tree. For development only, `--allow-dir
 - Trace links and gaps are checked separately. A structurally complete map is not complete verification.
 
 ## Navigate
+
+### Book の編集とプレビュー
+
+本文は `docs/book/`、目次は `docs/book/SUMMARY.md`、実行できる教材は `examples/book/` にあります。Lean を準備してから、リポジトリのルートで実行します。
+
+```sh
+bash scripts/bootstrap_mdbook.sh .toolchain/mdbook
+lake build
+python3 scripts/check_book.py
+.toolchain/mdbook/mdbook build
+python3 scripts/check_book.py --html build/book --skip-examples
+.toolchain/mdbook/mdbook serve --hostname 127.0.0.1
+```
+
+ブラウザーで `http://127.0.0.1:3000` を開きます。Book は mdBook 0.4.52 を使い、インストーラーは Linux x86_64 用です。本文の Lean 例を変更したら、必ず `check_book.py` を再実行してください。PR でも教材・リンク・HTML・公開合成の検査を行います。公開時には既存の検証履歴と Book を組み合わせ、過去のレポート URL を維持します。
+
+### 設計と検証の詳細
 
 - [Design, proof boundary and milestones](docs/DESIGN.md)
 - [基本タスク制御を理解する](docs/TASK_CONTROL.md)
